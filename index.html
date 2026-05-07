@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #ffffff;
+    --bg-surface: #f5f6f4;
+    --bg-card:    #f0f1ee;
+    --bg-hover:   #e8eae6;
+    --border:     #e0e2de;
+    --border-md:  #c4c8c0;
+    --text:       #1a1c1a;
+    --text-mid:   #565a54;
+    --text-dim:   #9aa096;
+    --accent:     #1a5c3a;
+    --accent-bg:  #eaf2ec;
+    --accent-mid: #2e8a58;
+    --grey:       #2a2d28;
+    --sans:       'Inter', system-ui, sans-serif;
+    --display:    'Plus Jakarta Sans', system-ui, sans-serif;
+    --max:        1100px;
+    --gap:        clamp(2rem, 5vw, 5rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 0;
+  }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name {
+    font-family: var(--display);
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; color: var(--text-mid); text-decoration: none;
+    letter-spacing: 0.05em; text-transform: uppercase; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: clamp(5rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -5%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(26,92,58,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--gap); align-items: end;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 1.5rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--accent-bg);
+    border-radius: 2rem; width: fit-content;
+    font-family: var(--sans);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.04; letter-spacing: -0.03em; font-weight: 700;
+    color: var(--text);
+  }
+  .hero h1 .muted { color: var(--text-dim); }
+  .hero-desc {
+    font-size: 1rem; color: var(--text-mid); line-height: 1.8;
+    margin-bottom: 2.25rem; font-weight: 300; max-width: 40ch;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 400; }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem; border-radius: 0.4rem;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.01em;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+    font-family: var(--sans); border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #134a2e; }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-md); }
+  .btn-secondary:hover { border-color: var(--text-mid); background: var(--bg-surface); }
+
+  /* DISCIPLINES */
+  .disciplines { border-bottom: 1px solid var(--border); overflow: hidden; background: var(--bg-surface); }
+  .disciplines-inner { display: flex; overflow-x: auto; scrollbar-width: none; justify-content: center; }
+  .disciplines-inner::-webkit-scrollbar { display: none; }
+  .discipline-item {
+    flex-shrink: 0; padding: 1rem 1.75rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); border-right: 1px solid var(--border);
+    white-space: nowrap; transition: color 0.2s;
+    font-family: var(--sans);
+  }
+  .discipline-item:first-child { padding-left: 1.75rem; border-left: 1px solid var(--border); }
+  .discipline-item.active { color: var(--accent); font-weight: 500; }
+  .discipline-item:hover { color: var(--text-mid); }
+
+  @media (max-width: 860px) {
+    .disciplines-inner { justify-content: flex-start; }
+    .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
+  }
+
+  /* SECTIONS */
+  section { padding: clamp(4rem, 9vw, 7rem) 0; border-bottom: 1px solid var(--border); }
+  .section-header {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: var(--gap); margin-bottom: 3.5rem; align-items: start;
+  }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-dim); padding-top: 0.5rem; font-weight: 500;
+    font-family: var(--sans);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    letter-spacing: -0.03em; line-height: 1.08; font-weight: 700; color: var(--text);
+  }
+
+  /* WORK */
+  .work-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 0.85rem; overflow: hidden;
+  }
+  .case-card {
+    background: var(--bg-card); padding: clamp(1.75rem, 4vw, 2.75rem);
+    position: relative; overflow: hidden; cursor: pointer;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 340px; transition: background 0.2s;
+  }
+  .case-card:hover { background: var(--bg-hover); }
+  .case-card.featured {
+    grid-column: 1 / -1; min-height: 400px;
+    background: var(--grey);
+    color: #fff;
+  }
+  .case-card.featured:hover { background: #1f221e; }
+  .case-number {
+    position: absolute; top: 1.75rem; right: 2rem;
+    font-family: var(--display); font-size: 0.65rem;
+    letter-spacing: 0.12em; color: var(--text-dim); font-weight: 600;
+  }
+  .case-card.featured .case-number { color: rgba(255,255,255,0.25); }
+  .case-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .tag {
+    font-size: 0.65rem; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 0.22rem 0.6rem; border: 1px solid var(--border-md);
+    color: var(--text-mid); border-radius: 0.25rem;
+    font-family: var(--sans);
+  }
+  .case-card.featured .tag { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.55); }
+  .case-title {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+    line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+    margin-bottom: 0.75rem; color: var(--text);
+  }
+  .case-card.featured .case-title { color: #fff; }
+  .case-desc {
+    font-size: 0.875rem; line-height: 1.65; color: var(--text-mid);
+    max-width: 52ch; font-weight: 300;
+  }
+  .case-card.featured .case-desc { color: rgba(255,255,255,0.55); }
+  .case-arrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-top: 1.5rem; color: var(--accent); opacity: 0.7;
+    transition: opacity 0.2s, gap 0.2s; font-family: var(--sans);
+  }
+  .case-card.featured .case-arrow { color: var(--accent-mid); }
+  .case-card:hover .case-arrow { opacity: 1; gap: 0.75rem; }
+
+  /* APPROACH */
+  .approach-grid { display: grid; grid-template-columns: 160px 1fr; gap: var(--gap); }
+  .approach-steps { display: flex; flex-direction: column; }
+  .approach-step {
+    padding: 1.75rem 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 2.5rem 1fr;
+    gap: 1.5rem; align-items: start; transition: border-color 0.2s;
+  }
+  .approach-step:hover { border-color: var(--border-md); }
+  .step-num {
+    font-family: var(--display); font-size: 0.7rem;
+    color: var(--text-dim); font-weight: 600; letter-spacing: 0.04em; padding-top: 0.2rem;
+  }
+  .step-body h3 {
+    font-family: var(--display); font-size: 1.1rem;
+    letter-spacing: -0.02em; font-weight: 700;
+    margin-bottom: 0.5rem; color: var(--text);
+  }
+  .step-body p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: start; }
+  .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
+  .sidebar-block h4 {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 1rem; font-weight: 500;
+    font-family: var(--sans);
+  }
+  .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .sidebar-list li {
+    font-size: 0.875rem; color: var(--text-mid);
+    padding-left: 1rem; position: relative; font-weight: 300;
+  }
+  .sidebar-list li::before {
+    content: ''; position: absolute; left: 0; top: 0.62em;
+    width: 4px; height: 4px; border-radius: 50%; background: var(--border-md);
+  }
+
+  /* CONTACT */
+  .contact-inner { display: grid; grid-template-columns: 160px 1fr; gap: var(--gap); align-items: start; }
+  .contact-body h2 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em; line-height: 1.08; font-weight: 700;
+    margin-bottom: 1rem; color: var(--text);
+  }
+  .contact-body p {
+    font-size: 0.95rem; color: var(--text-mid); font-weight: 300;
+    margin-bottom: 2.5rem; max-width: 46ch; line-height: 1.7;
+  }
+  .contact-email {
+    font-family: var(--display); font-size: 1.4rem; font-weight: 700;
+    color: var(--accent); text-decoration: none; letter-spacing: -0.02em;
+    transition: opacity 0.2s;
+  }
+  .contact-email:hover { opacity: 0.7; }
+  .social-links { margin-top: 2.5rem; display: flex; gap: 1.5rem; }
+  .social-links a {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    font-family: var(--sans);
+  }
+  .social-links a:hover { color: var(--text-mid); }
+
+  /* FOOTER */
+  footer { padding: 2rem 0; background: var(--bg-surface); border-top: 1px solid var(--border); }
+  .footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.02em;
+  }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .hero-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
+    .case-card.featured { grid-column: auto; }
+    .section-header, .approach-grid, .contact-inner { grid-template-columns: 1fr; }
+    .section-label { display: none; }
+    .nav-links { display: none; }
+    .work-grid { background: none; gap: 0.75rem; }
+    .case-card { border-radius: 0.6rem; border: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-name">Alex Morgan</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" style="border-top: none;">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">UX Designer</p>
+        <h1>Design that <span class="muted">works</span><br>before it lands.</h1>
+      </div>
+      <div>
+        <p class="hero-desc">
+          I design <strong>end-to-end digital services</strong> — from fuzzy briefs to shipped products.
+          Systems thinking, grounded in research, refined through prototyping.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View selected work</a>
+          <a href="#contact" class="btn btn-secondary">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="disciplines">
+  <div class="disciplines-inner">
+    <span class="discipline-item active">End-to-end product design</span>
+    <span class="discipline-item">Design systems</span>
+    <span class="discipline-item">Interaction &amp; prototyping</span>
+    <span class="discipline-item">Research &amp; strategy</span>
+    <span class="discipline-item">Service design</span>
+  </div>
+</div>
+
+<section id="work">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Selected work</span>
+      <h2 class="section-title">Problems worth solving,<br>carefully.</h2>
+    </div>
+    <div class="work-grid">
+      <a href="#" class="case-card featured fade-in">
+        <span class="case-number">01</span>
+        <div class="case-tags">
+          <span class="tag">End-to-end</span>
+          <span class="tag">0 → 1</span>
+          <span class="tag">B2C</span>
+        </div>
+        <h3 class="case-title">Redesigning a benefits service<br>for 2 million claimants</h3>
+        <p class="case-desc">Led UX across a 14-month programme — discovery through live. Reduced failed applications by 34% through simplified flows and plain-language guidance.</p>
+        <span class="case-arrow">Read case study →</span>
+      </a>
+      <a href="#" class="case-card fade-in">
+        <span class="case-number">02</span>
+        <div class="case-tags">
+          <span class="tag">Design system</span>
+          <span class="tag">B2B SaaS</span>
+        </div>
+        <h3 class="case-title">A design system for a 60-person engineering team</h3>
+        <p class="case-desc">Built token architecture, component library and governance model from scratch. Reduced design–dev handoff time by 40%.</p>
+        <span class="case-arrow">Read case study →</span>
+      </a>
+      <a href="#" class="case-card fade-in">
+        <span class="case-number">03</span>
+        <div class="case-tags">
+          <span class="tag">Research</span>
+          <span class="tag">Strategy</span>
+        </div>
+        <h3 class="case-title">Navigating a complex patient journey in healthcare</h3>
+        <p class="case-desc">Ran ethnographic research with 28 participants. Identified four unmet needs that shaped a product roadmap for the next two years.</p>
+        <span class="case-arrow">Read case study →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="container">
+    <div class="approach-grid">
+      <div>
+        <span class="section-label" style="display: block;">How<br>I work</span>
+      </div>
+      <div>
+        <h2 class="section-title fade-in" style="margin-bottom: 0.25rem;">Rigour first.<br>Simplicity always.</h2>
+        <div class="approach-steps" style="margin-top: 1rem;">
+          <div class="approach-step fade-in">
+            <span class="step-num">01</span>
+            <div class="step-body">
+              <h3>Understand before designing</h3>
+              <p>I start with research — interviews, contextual enquiry, data analysis. Design decisions are only as good as the understanding behind them.</p>
+            </div>
+          </div>
+          <div class="approach-step fade-in">
+            <span class="step-num">02</span>
+            <div class="step-body">
+              <h3>Design the system, not the screen</h3>
+              <p>Individual screens are symptoms. I design the underlying logic: the flows, the states, the edge cases, the language — so the whole coheres.</p>
+            </div>
+          </div>
+          <div class="approach-step fade-in">
+            <span class="step-num">03</span>
+            <div class="step-body">
+              <h3>Prototype to learn, not to sell</h3>
+              <p>Low-fidelity early, interactive fast. Prototypes are questions made tangible — not polished deliverables to be defended.</p>
+            </div>
+          </div>
+          <div class="approach-step fade-in">
+            <span class="step-num">04</span>
+            <div class="step-body">
+              <h3>Ship with precision</h3>
+              <p>Close collaboration with engineering at every stage. I care about what ships, not just what's in Figma — including the words on screen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">About</span>
+      <h2 class="section-title">The designer<br>behind the work.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm a UX designer with over a decade of experience working on <strong>complex, high-stakes digital products</strong> — government services, healthcare platforms, financial tools, and enterprise SaaS.</p>
+        <p>My background spans the full design lifecycle: from stakeholder alignment and discovery, through information architecture and interaction design, to design system governance and post-launch iteration.</p>
+        <p>I'm drawn to problems where the gap between user expectation and product reality is large — and where good design can close it meaningfully. I care about <strong>clarity</strong>: in how a product works, how it feels, and how it speaks.</p>
+        <p>Previously at HMRC, NHS Digital, and two venture-backed startups. Now available for senior contract and fractional engagements.</p>
+        <a href="#contact" class="btn btn-primary" style="margin-top: 0.75rem;">Work with me</a>
+      </div>
+      <div class="about-sidebar fade-in">
+        <div class="sidebar-block">
+          <h4>Core skills</h4>
+          <ul class="sidebar-list">
+            <li>End-to-end product design</li>
+            <li>Design systems &amp; tokens</li>
+            <li>Interaction &amp; prototyping</li>
+            <li>User research &amp; synthesis</li>
+            <li>Service &amp; journey design</li>
+            <li>Stakeholder facilitation</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>Tools</h4>
+          <ul class="sidebar-list">
+            <li>Figma &amp; FigJam</li>
+            <li>Framer</li>
+            <li>Maze &amp; UserTesting</li>
+            <li>Miro</li>
+            <li>HTML / CSS (prototype-level)</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>Sectors</h4>
+          <ul class="sidebar-list">
+            <li>Government &amp; public services</li>
+            <li>Healthcare</li>
+            <li>Fintech</li>
+            <li>Enterprise SaaS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <span class="section-label">Contact</span>
+      <div class="contact-body fade-in">
+        <h2>Let's make something worth using.</h2>
+        <p>Available for senior UX contracts, fractional design leadership, and long-term product partnerships. Based in London — open to remote.</p>
+        <a href="mailto:hello@alexmorganux.com" class="contact-email">hello@alexmorganux.com</a>
+        <div class="social-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Read.cv</a>
+          <a href="#">Dribbble</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Alex Morgan</span>
+    <span>UX Designer — London</span>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }),
+    { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.09 + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
