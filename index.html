@@ -282,7 +282,42 @@
   .step-body p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
 
   /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: start; }
+  .about-grid { display: grid; grid-template-columns: 260px 1fr 200px; gap: var(--gap); align-items: start; }
+  .about-image {
+    position: sticky;
+    top: 6rem;
+  }
+  .about-image img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    display: block;
+    background: var(--bg-card);
+  }
+  .about-image-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.5rem;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: var(--text-dim);
+  }
+  .about-image-placeholder svg {
+    opacity: 0.4;
+  }
+  .about-image-placeholder span {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    opacity: 0.5;
+  }
   .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
   .about-text p strong { color: var(--text); font-weight: 400; }
   .about-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
@@ -529,6 +564,16 @@
       <h2 class="section-title">The designer behind the work</h2>
     </div>
     <div class="about-grid">
+      <div class="about-image fade-in">
+        <!-- Replace src with your photo, e.g. src="images/graham.jpg" -->
+        <img src="" alt="Graham Baird" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="about-image-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          <span>Your photo</span>
+        </div>
+      </div>
       <div class="about-text fade-in">
         <p>I'm a UX designer with over a decade of experience working on <strong>complex, high-stakes digital products</strong> — government services, healthcare platforms, financial tools, and enterprise SaaS.</p>
         <p>My background spans the full design lifecycle: from stakeholder alignment and discovery, through information architecture and interaction design, to design system governance and post-launch iteration.</p>
@@ -540,31 +585,35 @@
         <div class="sidebar-block">
           <h4>Core skills</h4>
           <ul class="sidebar-list">
-            <li>End-to-end product design</li>
-            <li>Design systems &amp; tokens</li>
-            <li>Interaction &amp; prototyping</li>
+            <li>UX design</li>
+            <li>Service design</li>
+            <li>Interaction design</li>
+            <li>Content design</li>
             <li>User research &amp; synthesis</li>
-            <li>Service &amp; journey design</li>
-            <li>Stakeholder facilitation</li>
+            <li>Using design systems</li>
+            <li>Digital transformations</li>
+            <li>Stakeholder management</li>
           </ul>
         </div>
         <div class="sidebar-block">
-          <h4>Tools</h4>
+          <h4>Software and apps I use</h4>
           <ul class="sidebar-list">
-            <li>Figma &amp; FigJam</li>
-            <li>Framer</li>
-            <li>Maze &amp; UserTesting</li>
-            <li>Miro</li>
-            <li>HTML / CSS (prototype-level)</li>
+            <li>HTML &amp; CSS</li>
+            <li>Figma | FigJam | Sketch</li>
+            <li>Adobe Creative Cloud</li>
+            <li>Squarespace | WordPress</li>
+            <li>Webflow | Framer</li>
+            <li>Miro | Mural</li>
           </ul>
         </div>
         <div class="sidebar-block">
-          <h4>Sectors</h4>
+          <h4>Sectors I specialise in</h4>
           <ul class="sidebar-list">
             <li>Government &amp; public services</li>
-            <li>Healthcare</li>
-            <li>Fintech</li>
-            <li>Enterprise SaaS</li>
+            <li>Finance</li>
+            <li>Hospitality</li>
+            <li>Telecommunications</li>
+            <li>In reality, I can apply my skill set to anything</li>
           </ul>
         </div>
       </div>
