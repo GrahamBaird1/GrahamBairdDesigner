@@ -319,8 +319,23 @@
     font-family: var(--sans);
     opacity: 0.5;
   }
-  .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
-  .about-text p strong { color: var(--text); font-weight: 400; }
+.about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
+.about-text p strong { color: var(--text); font-weight: 400; }
+.about-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.about-list li {
+  font-size: 1rem;
+  color: var(--text-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  padding-left: 0;
+}
   .about-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
   .sidebar-block h4 {
     font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -621,16 +636,18 @@
         </div>
       </div>
       <div class="about-text fade-in">
-        <p>I'm a UX designer with over a decade of experience working on <strong>complex, high-stakes digital products</strong> — government services, healthcare platforms, financial tools, and enterprise SaaS.</p>
-        <p>I'm a multidisciplinary, user-centred designer specialising in:</p>
-        <li>UX design</li>
-        <li>Service design</li>
-        <li>Content design</li>
-        <li>and more...</li>
-        <p>My background spans the complete design lifecycle: from stakeholder alignment and discovery, through information architecture and interaction design, to design system governance and post-launch iteration.</p>
-        <p>I'm drawn to problems where the gap between user expectation and product reality is large — and where good design can close it meaningfully. I care about <strong>clarity</strong>: in how a product works, how it feels, and how it speaks.</p>
-        <p>Previously at HMRC, NHS Digital, and two venture-backed startups. Now available for senior contract and fractional engagements.</p>
-        <a href="#contact" class="btn btn-primary" style="margin-top: 0.75rem;">Work with me</a>
+      <p>I'm a UX designer with over a decade of experience working on <strong>complex, high-stakes digital products</strong> — government services, healthcare platforms, financial tools, and enterprise SaaS.</p>
+      <p>I'm a multidisciplinary, user-centred designer specialising in:</p>
+      <ul class="about-list">
+      <li>UX design</li>
+      <li>Service design</li>
+      <li>Content design</li>
+      <li>and more...</li>
+      </ul>
+      <p>My background spans the complete design lifecycle: from stakeholder alignment and discovery, through information architecture and interaction design, to design system governance and post-launch iteration.</p>
+      <p>I'm drawn to problems where the gap between user expectation and product reality is large — and where good design can close it meaningfully. I care about <strong>clarity</strong>: in how a product works, how it feels, and how it speaks.</p>
+      <p>Previously at HMRC, NHS Digital, and two venture-backed startups. Now available for senior contract and fractional engagements.</p>
+      <a href="#contact" class="btn btn-primary" style="margin-top: 0.75rem;">Work with me</a>
       </div>
       <div class="about-sidebar fade-in">
         <div class="sidebar-block">
