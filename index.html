@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   :root {
     --bg:         #ffffff;
     --bg-surface: #f5f6f4;
@@ -28,9 +28,9 @@
     --max:        1100px;
     --gap:        clamp(2rem, 5vw, 5rem);
   }
-
+ 
   html { scroll-behavior: smooth; }
-
+ 
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -39,9 +39,9 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-
+ 
   .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
-
+ 
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -69,7 +69,7 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--text); }
-
+ 
   /* HERO */
   .hero {
     padding: clamp(5rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 7rem);
@@ -109,7 +109,7 @@
   }
   .hero-desc strong { color: var(--text); font-weight: 400; }
   .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
+ 
   .btn {
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.7rem 1.4rem; border-radius: 0.4rem;
@@ -121,7 +121,7 @@
   .btn-primary:hover { background: #134a2e; }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-md); }
   .btn-secondary:hover { border-color: var(--text-mid); background: var(--bg-surface); }
-
+ 
   /* DISCIPLINES */
   .disciplines { border-bottom: 1px solid var(--border); overflow: hidden; background: var(--bg-surface); }
   .disciplines-inner { display: flex; overflow-x: auto; scrollbar-width: none; justify-content: center; }
@@ -136,12 +136,12 @@
   .discipline-item:first-child { padding-left: 1.75rem; border-left: 1px solid var(--border); }
   .discipline-item.active { color: var(--accent); font-weight: 500; }
   .discipline-item:hover { color: var(--text-mid); }
-
+ 
   @media (max-width: 860px) {
     .disciplines-inner { justify-content: flex-start; }
     .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
   }
-
+ 
   /* SECTIONS */
   section { padding: clamp(4rem, 9vw, 7rem) 0; border-bottom: 1px solid var(--border); }
   .section-header {
@@ -160,7 +160,7 @@
     font-size: clamp(1.9rem, 3.5vw, 2.9rem);
     letter-spacing: -0.03em; line-height: 1.08; font-weight: 700; color: var(--text);
   }
-
+ 
   /* WORK */
   .work-grid {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -168,19 +168,43 @@
     border: 1px solid var(--border); border-radius: 0.85rem; overflow: hidden;
   }
   .case-card {
-    background: var(--bg-card); padding: clamp(1.75rem, 4vw, 2.75rem);
+    background: var(--bg-card);
+    background-size: cover;
+    background-position: center;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
     position: relative; overflow: hidden; cursor: pointer;
     text-decoration: none; color: inherit;
     display: flex; flex-direction: column; justify-content: flex-end;
     min-height: 340px; transition: background 0.2s;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
   }
-  .case-card:hover { background: var(--bg-hover); }
+  .case-card:hover {
+    filter: grayscale(0%);
+  }
+  .case-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,12,10,0.88) 40%, rgba(10,12,10,0.35) 100%);
+    z-index: 0;
+    transition: opacity 0.2s;
+  }
+  .case-card:hover::before {
+    background: linear-gradient(to top, rgba(10,12,10,0.94) 40%, rgba(10,12,10,0.45) 100%);
+  }
+  .case-card > * { position: relative; z-index: 1; }
+  .case-card .case-number { color: rgba(255,255,255,0.25); }
+  .case-card .tag { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.65); }
+  .case-card .case-title { color: #fff; }
+  .case-card .case-desc { color: rgba(255,255,255,0.6); }
+  .case-card .case-arrow { color: #6db88a; }
   .case-card.featured {
     grid-column: 1 / -1; min-height: 400px;
     background: var(--grey);
     color: #fff;
   }
-  .case-card.featured:hover { background: #1f221e; }
+  .case-card.featured:hover { background: var(--grey); }
   .case-number {
     position: absolute; top: 1.75rem; right: 2rem;
     font-family: var(--display); font-size: 0.65rem;
@@ -215,7 +239,7 @@
   }
   .case-card.featured .case-arrow { color: var(--accent-mid); }
   .case-card:hover .case-arrow { opacity: 1; gap: 0.75rem; }
-
+ 
    /* CLIENTS */
   .clients-grid {
     display: grid;
@@ -262,7 +286,7 @@
   @media (max-width: 480px) {
     .clients-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
+ 
   /* APPROACH */
   .approach-grid { display: flex; flex-direction: column; gap: 1rem; }
   .approach-steps { display: flex; flex-direction: column; }
@@ -282,7 +306,7 @@
     margin-bottom: 0.5rem; color: var(--text);
   }
   .step-body p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
-
+ 
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 260px 1fr 200px; gap: var(--gap); align-items: start; }
   .about-image {
@@ -351,7 +375,7 @@
     content: ''; position: absolute; left: 0; top: 0.62em;
     width: 4px; height: 4px; border-radius: 50%; background: var(--border-md);
   }
-
+ 
   /* CONTACT */
   .contact-inner { display: flex; flex-direction: column; gap: 1rem; }
   .contact-body h2 {
@@ -377,7 +401,7 @@
     font-family: var(--sans);
   }
   .social-links a:hover { color: var(--text-mid); }
-
+ 
  /* MEMBERSHIPS */
   .memberships {
     display: flex;
@@ -425,7 +449,7 @@
     text-transform: uppercase;
     font-family: var(--sans);
   }
-
+ 
   /* FOOTER */
   footer { padding: 2rem 0; background: var(--bg-surface); border-top: 1px solid var(--border); }
   .footer-inner {
@@ -434,11 +458,11 @@
     display: flex; justify-content: space-between; align-items: center;
     font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.02em;
   }
-
+ 
   /* ANIMATIONS */
   .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
-
+ 
   /* RESPONSIVE */
   @media (max-width: 720px) {
     .hero-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
@@ -451,7 +475,7 @@
 </style>
 </head>
 <body>
-
+ 
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-name">Graham Baird</a>
@@ -464,7 +488,7 @@
     </ul>
   </div>
 </nav>
-
+ 
 <section class="hero" style="border-top: none;">
   <div class="container">
     <div class="hero-grid">
@@ -487,7 +511,7 @@
     </div>
   </div>
 </section>
-
+ 
 <div class="disciplines">
   <div class="disciplines-inner">
     <span class="discipline-item active">End-to-end design</span>
@@ -498,7 +522,7 @@
     <span class="discipline-item">User research</span>
   </div>
 </div>
-
+ 
 <section id="work">
   <div class="container">
     <div class="section-header fade-in">
@@ -506,7 +530,7 @@
       <h2 class="section-title">Problems solved meticulously</h2>
     </div>
     <div class="work-grid">
-      <a href="#" class="case-card featured fade-in">
+      <a href="#" class="case-card featured fade-in" style="background-image: url('https://picsum.photos/seed/telecom/1400/600');">
         <span class="case-number">01</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -518,7 +542,7 @@
         <p class="case-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
         <span class="case-arrow">View case study →</span>
       </a>
-      <a href="#" class="case-card fade-in">
+      <a href="#" class="case-card fade-in" style="background-image: url('https://picsum.photos/seed/university/900/600');">
         <span class="case-number">02</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -529,7 +553,7 @@
         <p class="case-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
         <span class="case-arrow">Read case study →</span>
       </a>
-      <a href="#" class="case-card fade-in">
+      <a href="#" class="case-card fade-in" style="background-image: url('https://picsum.photos/seed/hotel/900/600');">
         <span class="case-number">03</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -543,7 +567,7 @@
     </div>
   </div>
 </section>
-
+ 
   <section id="clients">
   <div class="container">
     <div class="section-header fade-in">
@@ -579,7 +603,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="approach">
   <div class="container">
     <div class="approach-grid">
@@ -619,7 +643,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="about">
  <div class="container">
     <div class="section-header fade-in" style="padding-bottom: 3rem;">
@@ -691,7 +715,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="contact">
   <div class="container">
     <div class="contact-inner">
