@@ -259,22 +259,17 @@
   .client-logo:hover { background: var(--bg-hover); }
   .client-logo img {
     max-width: 100%;
-    max-height: 40px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
     object-fit: contain;
+    display: block;
+    margin: 0 auto;
     filter: grayscale(100%);
-    opacity: 0.5;
+    opacity: 0.55;
     transition: opacity 0.2s, filter 0.2s;
   }
-  .client-logo:hover img { opacity: 0.8; filter: grayscale(60%); }
-  .logo-placeholder {
-    font-family: var(--display);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-align: center;
-  }
+  .client-logo:hover img { opacity: 0.85; filter: grayscale(0%); }
  
   @media (max-width: 860px) {
     .clients-grid { grid-template-columns: repeat(3, 1fr); }
@@ -572,29 +567,22 @@
     </div>
     <div class="clients-grid fade-in">
       <div class="client-logo">
-        <!-- Replace the img src with your logo file, e.g. src="logos/hmrc.png" -->
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-govuk.webp" alt="GOV.UK">
       </div>
       <div class="client-logo">
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-uog.webp" alt="University of Glasgow">
       </div>
       <div class="client-logo">
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-newsquest.webp" alt="Newsquest Media Group">
       </div>
       <div class="client-logo">
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-newsinternational.webp" alt="News International">
       </div>
       <div class="client-logo">
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-three.webp" alt="Three Mobile">
       </div>
       <div class="client-logo">
-        <img src="" alt="Client name" onerror="this.style.display='none'">
-        <div class="logo-placeholder">Your Logo</div>
+        <img src="logo-hilton.webp" alt="Hilton Hotels & Resorts">
       </div>
     </div>
   </div>
@@ -634,7 +622,8 @@
               <h3>Expectation meets precision</h3>
               <p>Through constant communication and close collaboration, there are no surprises at the end of the process – just what you've asked for.</p>  
             </div>
-            <div class="approach-step fade-in">
+          </div>
+          <div class="approach-step fade-in">
             <span class="step-num">05</span>
             <div class="step-body">
               <h3>Delivery of work</h3>
