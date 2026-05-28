@@ -430,6 +430,42 @@
     font-family: var(--sans);
   }
  
+  /* CTA BOX */
+  .cta-box {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--bg-surface);
+    max-width: 46ch;
+    overflow: hidden;
+  }
+  .cta-box-inner {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .cta-box-heading {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.35rem;
+  }
+  .cta-box-sub {
+    font-size: 0.875rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  .cta-box-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+ 
   /* FOOTER */
   footer { padding: 2rem 0; background: var(--bg-surface); border-top: 1px solid var(--border); }
   .footer-inner {
@@ -510,7 +546,7 @@
       <h2 class="section-title">Problems solved meticulously</h2>
     </div>
     <div class="work-grid">
-      <a href="#" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">
+      <a href="case-study-three-mobile.html" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">
         <span class="case-number">01</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -522,7 +558,7 @@
         <p class="case-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
         <span class="case-arrow">View case study →</span>
       </a>
-      <a href="#" class="case-card fade-in" style="background-image: url('uog-wireframe.webp');">
+      <a href="case-study-uog.html" class="case-card fade-in" style="background-image: url('uog-wireframe.webp');">
         <span class="case-number">02</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -533,7 +569,7 @@
         <p class="case-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
         <span class="case-arrow">View case study →</span>
       </a>
-      <a href="#" class="case-card fade-in" style="background-image: url('hilton-hotel.webp');">
+      <a href="case-study-hilton.html" class="case-card fade-in" style="background-image: url('hilton-hotel.webp');">
         <span class="case-number">03</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -699,6 +735,26 @@
         <h2>Let's get started</h2>
         <p>Available to start on new contract and freelance work immediately. <br> <br> Based in the United Kingdom. Open to remote and on-site work.</p>
         <a href="mailto:graham_baird@outlook.com" class="contact-email">graham_baird@outlook.com</a> <p>+44 (0)7791 746 775</p>
+ 
+        <div class="cta-box">
+          <div class="cta-box-inner">
+            <div class="cta-box-text">
+              <p class="cta-box-heading">Interested in working together?</p>
+              <p class="cta-box-sub">Book a free introductory call or send me an email to get the conversation started.</p>
+            </div>
+            <div class="cta-box-actions">
+              <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Book an introductory call
+              </a>
+              <a href="mailto:graham_baird@outlook.com?subject=Project%20enquiry&body=Hi%20Graham%2C%0A%0AI%27d%20like%20to%20discuss%20a%20project.%0A%0AProject%20summary%3A%0ATimeline%3A%0ABudget%20range%3A%0A%0AThanks%2C" class="btn btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                Email me
+              </a>
+            </div>
+          </div>
+        </div>
+ 
         <div class="social-links">
           <a href="#">LinkedIn</a>
           <a href="#">Read.cv</a>
@@ -743,3 +799,4 @@
  
 </body>
 </html>
+ 
