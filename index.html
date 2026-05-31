@@ -70,6 +70,51 @@
   }
   .nav-links a:hover { color: var(--text); }
  
+  /* HAMBURGER — mobile only */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 56px;
+    z-index: 99;
+  }
+  .mobile-menu a {
+    padding: 0.9rem clamp(1.25rem, 5vw, 3rem);
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-family: var(--sans);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--text); }
+  .mobile-menu.open { display: flex; }
+ 
   /* HERO */
   .hero {
     padding: clamp(5rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 7rem);
@@ -137,11 +182,6 @@
   .discipline-item.active { color: var(--accent); font-weight: 500; }
   .discipline-item:hover { color: var(--text-mid); }
  
-  @media (max-width: 860px) {
-    .disciplines-inner { justify-content: flex-start; }
-    .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
-  }
- 
   /* SECTIONS */
   section { padding: clamp(4rem, 9vw, 7rem) 0; border-bottom: 1px solid var(--border); }
   .section-header {
@@ -197,8 +237,7 @@
   .case-card .case-arrow { color: #6db88a; }
   .case-card.featured {
     grid-column: 1 / -1; min-height: 400px;
-    background: var(--grey);
-    color: #fff;
+    background: var(--grey); color: #fff;
   }
   .case-card.featured:hover { background: var(--grey); }
   .case-number {
@@ -236,41 +275,24 @@
   .case-card.featured .case-arrow { color: var(--accent-mid); }
   .case-card:hover .case-arrow { opacity: 1; gap: 0.75rem; }
  
-   /* CLIENTS */
+  /* CLIENTS */
   .clients-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 2rem;
-    background: none;
-    border: none;
-    border-radius: 0;
+    background: none; border: none; border-radius: 0;
   }
   .client-logo {
-    background: none;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+    background: none; aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center; padding: 0;
   }
   .client-logo img {
-    width: 110%;
-    height: 90px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    filter: grayscale(100%);
-    opacity: 0.45;
+    width: 110%; height: 90px; object-fit: contain;
+    display: block; margin: 0 auto;
+    filter: grayscale(100%); opacity: 0.45;
     transition: opacity 0.2s, filter 0.2s;
   }
   .client-logo:hover img { opacity: 0.85; filter: grayscale(0%); }
- 
-  @media (max-width: 860px) {
-    .clients-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 480px) {
-    .clients-grid { grid-template-columns: repeat(2, 1fr); }
-  }
  
   /* APPROACH */
   .approach-grid { display: flex; flex-direction: column; gap: 1rem; }
@@ -294,57 +316,29 @@
  
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 260px 1fr 200px; gap: var(--gap); align-items: start; }
-  .about-image {
-    position: static;
-  }
+  .about-image { position: static; }
   .about-image img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: 0.5rem;
-    display: block;
-    background: var(--bg-card);
+    width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+    border-radius: 0.5rem; display: block; background: var(--bg-card);
   }
   .about-image-placeholder {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    border-radius: 0.5rem;
-    background: var(--bg-card);
-    border: 1px dashed var(--border-md);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    color: var(--text-dim);
+    width: 100%; aspect-ratio: 3 / 4; border-radius: 0.5rem;
+    background: var(--bg-card); border: 1px dashed var(--border-md);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 0.6rem; color: var(--text-dim);
   }
-  .about-image-placeholder svg {
-    opacity: 0.4;
-  }
+  .about-image-placeholder svg { opacity: 0.4; }
   .about-image-placeholder span {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: var(--sans);
-    opacity: 0.5;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: var(--sans); opacity: 0.5;
   }
-.about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
-.about-text p strong { color: var(--text); font-weight: 400; }
-.about-list {
-  list-style: disc;
-  padding-left: 1.25rem;
-  margin-bottom: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.about-list li {
-  font-size: 1rem;
-  color: var(--text-mid);
-  line-height: 1.8;
-  font-weight: 300;
-  padding-left: 0;
-}
+  .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-list {
+    list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .about-list li { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; padding-left: 0; }
   .about-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
   .sidebar-block h4 {
     font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -363,36 +357,25 @@
  
   /* CONTACT */
   .contact-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    max-width: none;
+    display: flex; flex-direction: column; gap: 1.25rem; max-width: none;
   }
-  .contact-col { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-col-full { display: contents; }
-  .contact-body h2 {
+  .contact-heading {
     font-family: var(--display);
     font-size: clamp(2rem, 4vw, 3.5rem);
     letter-spacing: -0.03em; line-height: 1.08; font-weight: 700;
-    margin-bottom: 1rem; color: var(--text);
+    color: var(--text);
   }
-.contact-heading {
-  font-family: var(--display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: -0.03em; line-height: 1.08; font-weight: 700;
-  margin-bottom: 1rem; color: var(--text);
-}
-  .contact-body p {
-    font-size: 0.95rem; color: var(--text-mid); font-weight: 300;
-    margin-bottom: 0; max-width: 100%; line-height: 1.7;
+  .contact-para {
+    font-size: 0.95rem; color: var(--text-mid); font-weight: 300; line-height: 1.7;
   }
   .contact-email {
     font-family: var(--display); font-size: 1.1rem; font-weight: 700;
     color: var(--accent); text-decoration: none; letter-spacing: -0.02em;
-    transition: opacity 0.2s; display: block; margin-bottom: 0.25rem;
+    transition: opacity 0.2s; display: block;
   }
   .contact-email:hover { opacity: 0.7; }
-  .social-links { margin-top: 0; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-phone { font-size: 0.95rem; color: var(--text-mid); font-weight: 300; }
+  .social-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   .social-links a {
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--text-dim); text-decoration: none; transition: color 0.2s;
@@ -400,83 +383,39 @@
   }
   .social-links a:hover { color: var(--text-mid); }
  
- /* MEMBERSHIPS */
+  /* MEMBERSHIPS */
   .memberships {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 0;
-    align-items: center;
-    flex-wrap: wrap;
+    display: flex; gap: 1.5rem; margin-top: 0;
+    align-items: center; flex-wrap: wrap;
   }
   .membership-item {
-    flex: 1;
-    height: 100px;
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 1; height: 100px; background: none; border: none;
+    display: flex; align-items: center; justify-content: center;
   }
   .membership-item img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.45;
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    filter: grayscale(100%); opacity: 0.45;
     transition: opacity 0.2s, filter 0.2s;
   }
   .membership-item:hover img { opacity: 0.85; filter: grayscale(0%); }
-  .membership-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-    color: var(--text-dim);
-    width: 100%;
-    height: 100%;
-  }
-  .membership-placeholder span {
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: var(--sans);
-  }
  
   /* CTA BOX */
   .cta-box {
-    margin-top: 0;
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    background: var(--bg-surface);
-    overflow: hidden;
+    border: 1px solid var(--border); border-radius: 0.75rem;
+    background: var(--bg-surface); overflow: hidden;
   }
   .cta-box-inner {
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 1.5rem;
   }
   .cta-box-heading {
-    font-family: var(--display);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin-bottom: 0.35rem;
+    font-family: var(--display); font-size: 1rem; font-weight: 700;
+    color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.35rem;
   }
   .cta-box-sub {
-    font-size: 0.875rem;
-    color: var(--text-mid);
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 0;
+    font-size: 0.875rem; color: var(--text-mid); font-weight: 300;
+    line-height: 1.6; margin-bottom: 0;
   }
-  .cta-box-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
+  .cta-box-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
  
   /* FOOTER */
   footer { padding: 2rem 0; background: var(--bg-surface); border-top: 1px solid var(--border); }
@@ -493,15 +432,20 @@
  
   /* RESPONSIVE */
   @media (max-width: 860px) {
-    .contact-inner { grid-template-columns: 1fr 1fr; }
+    .clients-grid { grid-template-columns: repeat(3, 1fr); }
+    .disciplines-inner { justify-content: flex-start; }
+    .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
   }
   @media (max-width: 720px) {
     .hero-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
     .case-card.featured { grid-column: auto; }
-    .section-header, .approach-grid, .contact-inner { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
     .work-grid { background: none; gap: 0.75rem; }
     .case-card { border-radius: 0.6rem; border: 1px solid var(--border); }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+  @media (max-width: 480px) {
+    .clients-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -517,8 +461,19 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Get in touch</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+ 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work" onclick="closeMenu()">Work</a>
+  <a href="#clients" onclick="closeMenu()">Clients</a>
+  <a href="#approach" onclick="closeMenu()">Approach</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#contact" onclick="closeMenu()">Get in touch</a>
+</div>
  
 <section class="hero" style="border-top: none;">
   <div class="container">
@@ -532,7 +487,7 @@
       <div>
         <p class="hero-desc">
           I design <strong>end-to-end digital services</strong> — from inception to completion.
-          I deliver successful results by balancing user and business needs in equal measure. 
+          I deliver successful results by balancing user and business needs in equal measure.
         </p>
         <div class="hero-actions">
           <a href="#work" class="btn btn-primary">View work</a>
@@ -568,8 +523,7 @@
           <span class="tag">Content design</span>
           <span class="tag">Telecommunications</span>
         </div>
-        <h3 class="case-title">Website design for an international
-         <br>telecommunications organisation</h3>
+        <h3 class="case-title">Website design for an international<br>telecommunications organisation</h3>
         <p class="case-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
         <span class="case-arrow">View case study →</span>
       </a>
@@ -592,38 +546,26 @@
           <span class="tag">Research</span>
         </div>
         <h3 class="case-title">Design a series of articles for a renowned global hotel group</h3>
-       <p class="case-desc">Research, write and design articles to be published across the group websites promoting hotels in locations including the USA and Scotland.</p>
+        <p class="case-desc">Research, write and design articles to be published across the group websites promoting hotels in locations including the USA and Scotland.</p>
         <span class="case-arrow">View case study →</span>
       </a>
     </div>
   </div>
 </section>
  
-  <section id="clients">
+<section id="clients">
   <div class="container">
     <div class="section-header fade-in">
       <span class="section-label">Previous clients</span>
       <h2 class="section-title">Tried, tested and trusted</h2>
     </div>
     <div class="clients-grid fade-in">
-      <div class="client-logo">
-        <img src="logo-govuk.webp" alt="GOV.UK">
-      </div>
-      <div class="client-logo">
-        <img src="logo-uog.webp" alt="University of Glasgow">
-      </div>
-      <div class="client-logo">
-        <img src="logo-newsquest.webp" alt="Newsquest Media Group">
-      </div>
-      <div class="client-logo">
-        <img src="logo-newsinternational.webp" alt="News International">
-      </div>
-      <div class="client-logo">
-        <img src="logo-three.webp" alt="Three Mobile">
-      </div>
-      <div class="client-logo">
-        <img src="logo-hilton.webp" alt="Hilton Hotels & Resorts">
-      </div>
+      <div class="client-logo"><img src="logo-govuk.webp" alt="GOV.UK"></div>
+      <div class="client-logo"><img src="logo-uog.webp" alt="University of Glasgow"></div>
+      <div class="client-logo"><img src="logo-newsquest.webp" alt="Newsquest Media Group"></div>
+      <div class="client-logo"><img src="logo-newsinternational.webp" alt="News International"></div>
+      <div class="client-logo"><img src="logo-three.webp" alt="Three Mobile"></div>
+      <div class="client-logo"><img src="logo-hilton.webp" alt="Hilton Hotels & Resorts"></div>
     </div>
   </div>
 </section>
@@ -633,42 +575,40 @@
     <div class="approach-grid">
       <span class="section-label">Approach to work</span>
       <h2 class="section-title fade-in" style="margin-bottom: 0.25rem;">Keep it informed and keep it simple</h2>
-        <div class="approach-steps" style="margin-top: 1rem;">
-          <div class="approach-step fade-in">
-            <span class="step-num">01</span>
-            <div class="step-body">
-              <h3>Understand the problem</h3>
-              <p>The process starts with data and research. Both of which form the insights used to make informed design decisions to set us up for success.</p>
-            </div>
+      <div class="approach-steps" style="margin-top: 1rem;">
+        <div class="approach-step fade-in">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <h3>Understand the problem</h3>
+            <p>The process starts with data and research. Both of which form the insights used to make informed design decisions to set us up for success.</p>
           </div>
-          <div class="approach-step fade-in">
-            <span class="step-num">02</span>
-            <div class="step-body">
-              <h3>Prototyping equals learning</h3>
-              <p> Create low-fidelity designs early, iterate quickly, and reap the rewards in the long term. Prototypes answer the remaining questions.</p>    
-               <p>Low-fidelity early, interactive fast. Prototypes are questions made tangible — not polished deliverables to be defended.</p>
-            </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <h3>Prototyping equals learning</h3>
+            <p>Create low-fidelity designs early, iterate quickly, and reap the rewards in the long term. Prototypes answer the remaining questions.</p>
           </div>
-          <div class="approach-step fade-in">
-            <span class="step-num">03</span>
-            <div class="step-body">
-              <h3>Designing holistically</h3>
-              <p>From analysing insights and defining user flows and journeys to considering edge cases, I design with the entire ecosystem in mind.</p>
-            </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <h3>Designing holistically</h3>
+            <p>From analysing insights and defining user flows and journeys to considering edge cases, I design with the entire ecosystem in mind.</p>
           </div>
-          <div class="approach-step fade-in">
-            <span class="step-num">04</span>
-            <div class="step-body">
-              <h3>Expectation meets precision</h3>
-              <p>Through constant communication and close collaboration, there are no surprises at the end of the process – just what you've asked for.</p>  
-            </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">04</span>
+          <div class="step-body">
+            <h3>Expectation meets precision</h3>
+            <p>Through constant communication and close collaboration, there are no surprises at the end of the process – just what you've asked for.</p>
           </div>
-          <div class="approach-step fade-in">
-            <span class="step-num">05</span>
-            <div class="step-body">
-              <h3>Delivery of work</h3>
-              <p>The handover of work, along with all project materials, is prepared to ensure a seamless transition and successful project completion.</p>
-            </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">05</span>
+          <div class="step-body">
+            <h3>Delivery of work</h3>
+            <p>The handover of work, along with all project materials, is prepared to ensure a seamless transition and successful project completion.</p>
           </div>
         </div>
       </div>
@@ -677,38 +617,41 @@
 </section>
  
 <section id="about">
- <div class="container">
-    <div class="section-header fade-in" style="padding-bottom: 3rem;">
+  <div class="container">
+    <div class="section-header fade-in" style="border-bottom: 1px solid var(--border); padding-bottom: 3rem;">
       <span class="section-label">About me</span>
       <h2 class="section-title">Hi, I'm Graham...</h2>
     </div>
     <div class="about-grid">
       <div class="about-image fade-in">
-        <!-- Replace src with your photo, e.g. src="images/graham.jpg" -->
         <img src="Graham_Baird_profile.jpg" alt="Graham Baird" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="about-image-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Your photo</span>
+        </div>
       </div>
       <div class="about-text fade-in">
-      <p>I'm a multidisciplinary, user-centred designer specialising in:</p>
-      <ul class="about-list">
-      <li>UX design</li>
-      <li>Service design</li>
-      <li>Content design</li>
-      <li>and more...</li>
-      </ul>
-      <p>With 15 years of experience working on <strong>complex, high-stakes digital products</strong> spanning the complete design lifecycle, I have worked across the public and private sectors.</p>
-      <p>My expertise is in designing accessible, user-led services that meet people's needs and help them achieve their goals.</p>
-      <p>I have a comprehensive skill set that is wide-ranging and includes:</p>
-      <ul class="about-list">
-      <li>creating user-centred, end-to-end services for online and offline platforms</li>
-      <li>designing easy-to-read content in plain English that is understandable for all user groups</li>
-      <li>identifying, establishing and designing user flows, service maps and blueprints</li>
-      <li>developing user experiences enabling people to successfully use products and services</li>
-      <li>expertise in understanding complex services</li>
-      <li>creating prototype products to test with users</li>
-      </ul>
-      <p>As a designer, I want to understand the intricacies of how things work, take this knowledge and turn it into a user-led solution. While also demonstrating the pragmatism that ensures the solutions meet business requirements. These aspects are of equal importance to me in designing end-to-end services. </p>
-       </div>
-       <div class="about-sidebar fade-in">
+        <p>I'm a multidisciplinary, user-centred designer specialising in:</p>
+        <ul class="about-list">
+          <li>UX design</li>
+          <li>Service design</li>
+          <li>Content design</li>
+          <li>and more...</li>
+        </ul>
+        <p>With 15 years of experience working on <strong>complex, high-stakes digital products</strong> spanning the complete design lifecycle, I have worked across the public and private sectors.</p>
+        <p>My expertise is in designing accessible, user-led services that meet people's needs and help them achieve their goals.</p>
+        <p>I have a comprehensive skill set that is wide-ranging and includes:</p>
+        <ul class="about-list">
+          <li>creating user-centred, end-to-end services for online and offline platforms</li>
+          <li>designing easy-to-read content in plain English that is understandable for all user groups</li>
+          <li>identifying, establishing and designing user flows, service maps and blueprints</li>
+          <li>developing user experiences enabling people to successfully use products and services</li>
+          <li>expertise in understanding complex services</li>
+          <li>creating prototype products to test with users</li>
+        </ul>
+        <p>As a designer, I want to understand the intricacies of how things work, take this knowledge and turn it into a user-led solution. While also demonstrating the pragmatism that ensures the solutions meet business requirements. These aspects are of equal importance to me in designing end-to-end services.</p>
+      </div>
+      <div class="about-sidebar fade-in">
         <div class="sidebar-block">
           <h4>Core skills</h4>
           <ul class="sidebar-list">
@@ -723,26 +666,25 @@
           </ul>
         </div>
         <div class="sidebar-block">
-           <h4>Languages</h4>
+          <h4>Languages</h4>
           <ul class="sidebar-list">
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>Python</li>
-          </ul>
-        </div>           
-          <div class="sidebar-block">
-          <h4>Software and apps</h4>
-          <ul class="sidebar-list">
-           <li>Figma</li>
-           <li>FigJam</li>
-           <li>Sketch</li>
-           <li>Adobe Creative Cloud</li>
-           <li>Miro</li>
-           <li>Mural</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Python</li>
           </ul>
         </div>
         <div class="sidebar-block">
-         <ul class="sidebar-list">
+          <h4>Software and apps</h4>
+          <ul class="sidebar-list">
+            <li>Figma</li>
+            <li>FigJam</li>
+            <li>Sketch</li>
+            <li>Adobe Creative Cloud</li>
+            <li>Miro</li>
+            <li>Mural</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
           <h4>CMS</h4>
           <ul class="sidebar-list">
             <li>Squarespace</li>
@@ -752,7 +694,6 @@
           </ul>
         </div>
         <div class="sidebar-block">
-         <ul class="sidebar-list">
           <h4>Sectors worked in</h4>
           <ul class="sidebar-list">
             <li>Government</li>
@@ -770,10 +711,12 @@
   <div class="container">
     <div class="contact-inner fade-in">
       <span class="section-label">Get in touch</span>
-      <h2 class="section-title">Let's get started</h2>
-     <p style="font-size:0.95rem; color:var(--text-mid); font-weight:300; line-height:1.7;">Available to start on new contract and freelance work immediately. Open to remote and on-site work.</p>
-     <p style="font-size:0.95rem; color:var(--text-mid); font-weight:300; line-height:1.7;">Based in the United Kingdom.</p>
-     <div class="cta-box">
+      <h2 class="contact-heading">Let's get started</h2>
+      <p class="contact-para">Available to start on new contract and freelance work immediately. Open to remote and on-site work.</p>
+      <p class="contact-para">Based in the United Kingdom.</p>
+      <a href="mailto:graham_baird@outlook.com" class="contact-email">graham_baird@outlook.com</a>
+      <p class="contact-phone">+44 (0)7791 746 775</p>
+      <div class="cta-box">
         <div class="cta-box-inner">
           <div class="cta-box-text">
             <p class="cta-box-heading">Interested in working together?</p>
@@ -789,21 +732,17 @@
               Email me
             </a>
           </div>
-      <a href="mailto:graham_baird@outlook.com" class="contact-email">graham_baird@outlook.com</a>
-      <p class="contact-phone">+44 (0)7791 746 775</p>
         </div>
       </div>
-     <p></p>
-     <p></p>
       <div class="memberships">
         <div class="membership-item">
-          <img src="Circle_SQ_member.webp" alt="Squarespace Circle Gold member" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="Circle_SQ_member.webp" alt="Squarespace Circle Gold member" onerror="this.style.display='none';">
         </div>
         <div class="membership-item">
-          <img src="IxDF_member_greyscale.png" alt="IxDF professional member" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="IxDF_member_greyscale.png" alt="IxDF professional member" onerror="this.style.display='none';">
         </div>
         <div class="membership-item">
-          <img src="Bark_GB_member_greyscale.png" alt="Bark professional member" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="Bark_GB_member_greyscale.png" alt="Bark professional member" onerror="this.style.display='none';">
         </div>
       </div>
     </div>
@@ -828,6 +767,19 @@
     el.style.transitionDelay = (i % 4) * 0.09 + 's';
     obs.observe(el);
   });
+ 
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+ 
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+ 
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
 </script>
  
 </body>
