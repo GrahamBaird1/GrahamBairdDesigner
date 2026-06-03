@@ -18,7 +18,7 @@
     --border-md:  #c4c8c0;
     --text:       #1a1c1a;
     --text-mid:   #565a54;
-    --text-dim:   #9aa096;
+    --text-dim:   #727072;
     --accent:     #1a5c3a;
     --accent-bg:  #eaf2ec;
     --accent-mid: #2e8a58;
@@ -28,10 +28,27 @@
     --max:        1100px;
     --gap:        clamp(2rem, 5vw, 5rem);
   }
- 
+
+/* SKIP LINK */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 0 0 0.25rem 0.25rem;
+  }
+  .skip-link:focus { top: 0; }
+
   html { scroll-behavior: smooth; }
- 
+  
   body {
+    <a href="#work" class="skip-link">Skip to main content</a>
     font-family: var(--sans);
     background: var(--bg);
     color: var(--text);
@@ -88,6 +105,11 @@
     border-radius: 2px;
     transition: all 0.2s;
   }
+ .nav-hamburger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
   .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -518,7 +540,7 @@
       <p class="contact-para">I'm unable to showcase my government work publicly due to strict confidentiality rules. Should you wish to view this work, <a href="#contact">please get in touch</a></p>
     </div>
     <div class="work-grid">
-      <a href="case-study-three-mobile.html" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">
+      <a href="case-study-three-mobile.html" aria-label="View case study: Three Mobile website design" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">       
         <span class="case-number">01</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -529,7 +551,7 @@
         <p class="case-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
         <span class="case-arrow">View case study →</span>
       </a>
-      <a href="case-study-uog.html" class="case-card fade-in" style="background-image: url('uog-wireframe.webp');">
+      <a href="case-study-uog.html" aria-label="View case study: University of Glasgow website wireframe and design" class="case-card fade-in" style="background-image: url('uog-wireframe.webp');">
         <span class="case-number">02</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -540,7 +562,7 @@
         <p class="case-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
         <span class="case-arrow">View case study →</span>
       </a>
-      <a href="case-study-hilton.html" class="case-card fade-in" style="background-image: url('hilton-hotel.webp');">
+      <a href="case-study-hilton.html" aria-label="View case study: Hilton Hotel Group article series design" class="case-card fade-in" style="background-image: url('hilton-hotel.webp');">
         <span class="case-number">03</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -729,8 +751,8 @@
             </a>
           </div>
       <a href="mailto:graham_baird@outlook.com" class="contact-email">graham_baird@outlook.com</a>
-      <p class="contact-phone">+44 (0)7791 746 775</p>
-        </div>
+      <p class="contact-phone"><a href="tel:+447791746775">+44 (0)7791 746 775</a></p>
+      </div>
       </div>
       <br>
       <div class="memberships">
