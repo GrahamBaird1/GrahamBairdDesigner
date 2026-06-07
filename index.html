@@ -172,6 +172,10 @@ html { scroll-behavior: smooth; }
   .disciplines { border-bottom: 1px solid var(--border); overflow: hidden; background: var(--bg-surface); }
   .disciplines-inner { display: flex; overflow-x: auto; scrollbar-width: none; justify-content: center; }
   .disciplines-inner::-webkit-scrollbar { display: none; }
+  .disciplines-inner:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
+  }
   .discipline-item {
     flex-shrink: 0; padding: 1rem 1.75rem;
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
@@ -235,7 +239,7 @@ html { scroll-behavior: smooth; }
   .case-card .tag { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.65); }
   .case-card .case-title { color: #fff; }
   .case-card .case-desc { color: rgba(255,255,255,0.6); }
-  .case-card .case-arrow { color: #1a5c3a; }
+  .case-card .case-arrow { color: #6db88a; }
   .case-card.featured {
     grid-column: 1 / -1; min-height: 400px;
     background: var(--grey); color: #fff;
@@ -518,15 +522,15 @@ html { scroll-behavior: smooth; }
   </div>
 </nav>
  
-<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden>
   <a href="#work" onclick="closeMenu()">Work</a>
   <a href="#clients" onclick="closeMenu()">Clients</a>
   <a href="#approach" onclick="closeMenu()">Approach</a>
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#contact" onclick="closeMenu()">Get in touch</a>
-</div>
+</nav>
  
-<section class="hero" style="border-top: none;" aria-label="Introduction">
+<header class="hero" style="border-top: none;" aria-label="Site introduction">
   <div class="container">
     <div class="hero-grid">
       <div>
@@ -547,10 +551,10 @@ html { scroll-behavior: smooth; }
       </div>
     </div>
   </div>
-</section>
+</header>
  
-<div class="disciplines" aria-label="Areas of expertise">
-  <div class="disciplines-inner">
+<div class="disciplines" role="region" aria-label="Areas of expertise">
+  <div class="disciplines-inner" tabindex="0" role="region" aria-label="Scrollable list of design disciplines">
     <span class="discipline-item active">End-to-end design</span>
     <span class="discipline-item">UX design</span>
     <span class="discipline-item">Service design</span>
@@ -561,11 +565,11 @@ html { scroll-behavior: smooth; }
 </div>
  
 <main id="main-content">
-<section id="work">
+<section id="work" aria-labelledby="work-heading">
   <div class="container">
     <div class="section-header fade-in">
       <span class="section-label">Selected work</span>
-      <h2 class="section-title">Problems solved meticulously</h2>
+      <h2 class="section-title" id="work-heading">Problems solved meticulously</h2>
       <p class="contact-para">I'm unable to showcase my government work publicly due to strict confidentiality rules. Should you wish to view this work, <a href="#contact">please get in touch</a></p>
     </div>
     <div class="work-grid">
@@ -606,11 +610,11 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
  
-<section id="clients">
+<section id="clients" aria-labelledby="clients-heading">
   <div class="container">
     <div class="section-header fade-in">
       <span class="section-label">Previous clients</span>
-      <h2 class="section-title">Tried, tested and trusted</h2>
+      <h2 class="section-title" id="clients-heading">Tried, tested and trusted</h2>
     </div>
     <div class="clients-grid fade-in">
       <div class="client-logo"><img src="logo-govuk.webp" alt="GOV.UK"></div>
@@ -623,11 +627,11 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
  
-<section id="approach">
+<section id="approach" aria-labelledby="approach-heading">
   <div class="container">
     <div class="approach-grid">
       <span class="section-label">Approach to work</span>
-      <h2 class="section-title fade-in" style="margin-bottom: 0.25rem;">Keep it informed and keep it simple</h2>
+      <h2 class="section-title fade-in" id="approach-heading" style="margin-bottom: 0.25rem;">Keep it informed and keep it simple</h2>
       <div class="approach-steps" style="margin-top: 1rem;">
         <div class="approach-step fade-in">
           <span class="step-num">01</span>
@@ -669,11 +673,11 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
  
-<section id="about">
+<section id="about" aria-labelledby="about-heading">
   <div class="container">
     <div class="section-header fade-in">
       <span class="section-label">About me</span>
-      <h2 class="section-title">Hi, I'm Graham...</h2>
+      <h2 class="section-title" id="about-heading">Hi, I'm Graham...</h2>
     </div>
     <div class="about-grid">
       <div class="about-image fade-in">
@@ -698,8 +702,8 @@ html { scroll-behavior: smooth; }
           <li>expertise in understanding complex services</li>
           <li>creating prototype products to test with users</li>
         </ul>
-       <h3>Design philosophy</h3> 
-       <p>As a designer, I want to understand the intricacies of how things work, take this knowledge and turn it into a user-led solution. While also demonstrating the pragmatism that ensures the solutions meet business requirements. These aspects are of equal importance to me in designing services.</p>
+        <h3>Design philosophy</h3> 
+        <p>As a designer, I want to understand the intricacies of how things work, take this knowledge and turn it into a user-led solution. While also demonstrating the pragmatism that ensures the solutions meet business requirements. These aspects are of equal importance to me in designing services.</p>
       </div>
       <div class="about-sidebar fade-in">
         <div class="sidebar-block">
@@ -757,11 +761,11 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
  
-<section id="contact">
+<section id="contact" aria-labelledby="contact-heading">
   <div class="container">
     <div class="contact-inner fade-in">
       <span class="section-label">Get in touch</span>
-      <h2 class="contact-heading">Let's get started</h2>
+      <h2 class="contact-heading" id="contact-heading">Let's get started</h2>
       <p class="contact-para">Available to start on new freelance and contract work immediately. Open to remote and on-site work.</p>
       <p class="contact-para">Based in the United Kingdom.</p>
       <div class="cta-box">
@@ -825,7 +829,13 @@ html { scroll-behavior: smooth; }
  
   hamburger.addEventListener('click', () => {
     const isOpen = hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
+    if (isOpen) {
+      mobileMenu.removeAttribute('hidden');
+      mobileMenu.classList.add('open');
+    } else {
+      mobileMenu.setAttribute('hidden', '');
+      mobileMenu.classList.remove('open');
+    }
     hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   });
@@ -833,6 +843,9 @@ html { scroll-behavior: smooth; }
   function closeMenu() {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('hidden', '');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
   }
 </script>
  
