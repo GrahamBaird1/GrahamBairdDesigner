@@ -29,23 +29,7 @@
     --gap:        clamp(2rem, 5vw, 5rem);
   }
 
-/* SKIP LINK */
-  .skip-link {
-    position: absolute;
-    top: -100%;
-    left: 1rem;
-    background: var(--accent);
-    color: #fff;
-    padding: 0.5rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.875rem;
-    text-decoration: none;
-    z-index: 9999;
-    border-radius: 0 0 0.25rem 0.25rem;
-  }
-  .skip-link:focus { top: 0; }
-
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
   
   body {
     font-family: var(--sans);
@@ -58,8 +42,6 @@
  
   .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
 
- <a href="#work" class="skip-link">Skip to main content</a>
- 
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -106,11 +88,7 @@
     border-radius: 2px;
     transition: all 0.2s;
   }
- .nav-hamburger:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
+
   .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -291,12 +269,24 @@
   .case-card.featured .case-desc { color: rgba(255,255,255,0.55); }
   .case-arrow {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    margin-top: 1.5rem; color: var(--accent); opacity: 0.7;
-    transition: opacity 0.2s, gap 0.2s; font-family: var(--sans);
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.25rem;
+    background: #ffffff;
+    color: var(--accent);
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: var(--sans);
+    width: fit-content;
+    transition: background 0.2s, color 0.2s;
   }
-  .case-card.featured .case-arrow { color: var(--accent-mid); }
-  .case-card:hover .case-arrow { opacity: 1; gap: 0.75rem; }
+  .case-arrow:hover { background: var(--accent-bg); color: var(--accent); }
+  .case-card.featured .case-arrow { color: var(--accent); }
+  .case-card:hover .case-arrow { background: var(--accent-bg); }
  
   /* CLIENTS */
   .clients-grid {
@@ -470,11 +460,49 @@
   @media (max-width: 480px) {
     .clients-grid { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* ── ACCESSIBILITY ── */
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 0 0 0.25rem 0.25rem;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* Global focus-visible styles */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* Remove default outline only when focus-visible is supported */
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* Ensure links within text are visually distinguishable */
+  .contact-para a { color: var(--accent); text-decoration: underline; }
+  .contact-para a:hover { opacity: 0.8; }
+
+  /* Ensure SVGs in buttons are hidden from assistive tech */
+  .btn svg { aria-hidden: true; }
+
 </style>
 </head>
 <body>
- 
-<nav>
+
+<a href="#work" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Primary navigation">
   <div class="nav-inner">
     <a href="#" class="nav-name">Graham Baird</a>
     <ul class="nav-links">
@@ -484,13 +512,13 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Get in touch</a></li>
     </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
  
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
   <a href="#work" onclick="closeMenu()">Work</a>
   <a href="#clients" onclick="closeMenu()">Clients</a>
   <a href="#approach" onclick="closeMenu()">Approach</a>
@@ -498,7 +526,7 @@
   <a href="#contact" onclick="closeMenu()">Get in touch</a>
 </div>
  
-<section class="hero" style="border-top: none;">
+<section class="hero" style="border-top: none;" aria-label="Introduction">
   <div class="container">
     <div class="hero-grid">
       <div>
@@ -521,7 +549,7 @@
   </div>
 </section>
  
-<div class="disciplines">
+<div class="disciplines" aria-label="Areas of expertise">
   <div class="disciplines-inner">
     <span class="discipline-item active">End-to-end design</span>
     <span class="discipline-item">UX design</span>
@@ -532,16 +560,16 @@
   </div>
 </div>
  
+<main id="main-content">
 <section id="work">
   <div class="container">
     <div class="section-header fade-in">
       <span class="section-label">Selected work</span>
       <h2 class="section-title">Problems solved meticulously</h2>
-      <p></p> 
       <p class="contact-para">I'm unable to showcase my government work publicly due to strict confidentiality rules. Should you wish to view this work, <a href="#contact">please get in touch</a></p>
     </div>
     <div class="work-grid">
-      <a href="case-study-three-mobile.html" aria-label="View case study: Three Mobile website design" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">       
+      <a href="case-study-three-mobile.html" aria-label="View case study: Three Mobile website design" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">
         <span class="case-number">01</span>
         <div class="case-tags">
           <span class="tag">UX design</span>
@@ -742,12 +770,12 @@
             <p class="cta-box-sub">Book a free introductory call or send me an email to get the conversation started.</p>
           </div>
           <div class="cta-box-actions">
-            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Book an introductory call (opens in new tab)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
               Book an introductory call
             </a>
             <a href="mailto:graham_baird@outlook.com?subject=Project%20enquiry&body=Hi%20Graham%2C%0A%0AI%27d%20like%20to%20discuss%20a%20project.%0A%0AProject%20summary%3A%0ATimeline%3A%0ABudget%20range%3A%0A%0AThanks%2C" class="btn btn-secondary">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
               Email me
             </a>
           </div>
@@ -771,7 +799,8 @@
   </div>
 </section>
  
-<footer>
+</main>
+<footer role="contentinfo">
   <div class="footer-inner">
     <span>© 2026 Graham Baird</span>
     <span>Designer — United Kingdom</span>
@@ -794,8 +823,10 @@
   const mobileMenu = document.getElementById('mobileMenu');
  
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
+    const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   });
  
   function closeMenu() {
