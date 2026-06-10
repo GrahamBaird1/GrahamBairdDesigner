@@ -21,6 +21,12 @@
   .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem,5vw,3rem); }
  
  
+  /* BACK LINK BAR */
+  .back-top-wrap { background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
+  .back-top-container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+  .back-top { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-mid); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 400; font-family: var(--sans); transition: color 0.2s; }
+  .back-top:hover { color: var(--accent); }
+ 
   /* NAV */
   nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
   .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem,5vw,3rem); display: flex; align-items: center; justify-content: space-between; }
