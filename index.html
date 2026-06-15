@@ -535,7 +535,8 @@ html { scroll-behavior: smooth; }
 </head>
 <body>
 
-<a href="#work" class="skip-link">Skip to main content</a>
+<a href="#work" class="skip-link" id="skipLink">Skip to main content</a>
+
 <button class="back-to-top" id="backToTop" aria-label="Back to top of page">↑ Back to top of page</button>
 
 
@@ -897,6 +898,23 @@ html { scroll-behavior: smooth; }
   });
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+ 
+  // Skip link — bypasses smooth scroll to move focus correctly
+  document.getElementById('skipLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.getElementById('work');
+    if (target) {
+      // Temporarily disable smooth scrolling for the skip link
+      document.documentElement.style.scrollBehavior = 'auto';
+      target.setAttribute('tabindex', '-1');
+      target.focus();
+      target.scrollIntoView();
+      // Restore smooth scrolling
+      setTimeout(() => {
+        document.documentElement.style.scrollBehavior = '';
+      }, 100);
+    }
   });
 </script>
  
