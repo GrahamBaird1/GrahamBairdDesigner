@@ -220,6 +220,30 @@
   outline: 3px solid #fff;
   outline-offset: 2px;
 }
+
+ /* BACK TO TOP */
+.back-to-top {
+  position: fixed;
+  bottom: -100%;
+  right: 1rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border: none;
+  cursor: pointer;
+  transition: bottom 0.2s;
+}
+.back-to-top.visible { bottom: 0; }
+.back-to-top:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
  
   /* Global focus-visible — keyboard users see a clear green outline */
   :focus-visible {
