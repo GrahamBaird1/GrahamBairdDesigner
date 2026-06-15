@@ -221,6 +221,11 @@
   outline-offset: 2px;
 }
 
+ /* Ensure skip-link target isn't hidden behind sticky navigation */
+#main-content {
+  scroll-margin-top: 100px;
+}
+
  /* BACK TO TOP */
 .back-to-top {
   position: fixed;
@@ -325,8 +330,8 @@
   </div>
 </header>
  
-<main id="main-content">
-<section aria-labelledby="glance-heading">
+<main id="main-content" tabindex="-1">
+ <section aria-labelledby="glance-heading">
   <div class="container fade-in">
     <span class="section-label">Project information</span>
     <h2 class="section-title" id="glance-heading">At a glance</h2>
@@ -459,10 +464,45 @@
     hamburger.setAttribute('aria-label', 'Open menu');
   }
 
- // Skip link — bypasses smooth scroll to move focus correctly
-  document.getElementById('skipLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.getElementById('work');
+ // Back to top
+
+const backToTop = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Skip link
+
+document.getElementById('skipLink').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const target = document.getElementById('main-content');
+
+  if (target) {
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    target.setAttribute('tabindex', '-1');
+    target.focus();
+    target.scrollIntoView();
+
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = '';
+    }, 100);
+  }
+});
+
     if (target) {
       // Temporarily disable smooth scrolling for the skip link
       document.documentElement.style.scrollBehavior = 'auto';
@@ -475,6 +515,26 @@
       }, 100);
     }
   }); 
+
+ // Back to top button
+ const backToTop = document.getElementById('backToTop');
+
+ window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+
 </script>
 </body>
 </html>
