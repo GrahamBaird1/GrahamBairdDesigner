@@ -177,7 +177,7 @@ html { scroll-behavior: smooth; }
   .disciplines-inner::-webkit-scrollbar { display: none; }
   .disciplines-inner:focus-visible {
     outline: 3px solid var(--accent);
-    outline-offset: -3px;
+    outline-offset: 3px;
   }
   .discipline-item {
     flex-shrink: 0; padding: 1rem 1.75rem;
@@ -538,6 +538,8 @@ html { scroll-behavior: smooth; }
   }
   /* Remove default outline only when focus-visible is supported */
   :focus:not(:focus-visible) { outline: none; }
+  [tabindex="-1"]:focus,
+  [tabindex="-1"]:focus-visible { outline: none; }
 
   /* Ensure links within text are visually distinguishable */
   .contact-para a { color: var(--accent); text-decoration: underline; }
