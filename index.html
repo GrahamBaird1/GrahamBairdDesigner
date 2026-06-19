@@ -505,10 +505,10 @@ html { scroll-behavior: smooth; }
   outline-offset: 2px;
 }
 
- /* BACK TO TOP */
-  .back-to-top {
+/* BACK TO TOP */
+.back-to-top {
   position: fixed;
-  bottom: -100%;
+  bottom: 0;
   right: 1rem;
   background: var(--accent);
   color: #fff;
@@ -521,9 +521,10 @@ html { scroll-behavior: smooth; }
   border-radius: 0.25rem 0.25rem 0 0;
   border: none;
   cursor: pointer;
-  transition: bottom 0.2s;
+  transform: translateY(calc(100% + 4px));
+  transition: transform 0.2s ease;
 }
-.back-to-top.visible { bottom: 0; }
+.back-to-top.visible { transform: translateY(0); }
 .back-to-top:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
