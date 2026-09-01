@@ -177,7 +177,7 @@ html { scroll-behavior: smooth; }
   .disciplines-inner::-webkit-scrollbar { display: none; }
   .disciplines-inner:focus-visible {
     outline: 3px solid var(--accent);
-    outline-offset: 3px;
+    outline-offset: -3px;
   }
   .discipline-item {
     flex-shrink: 0; padding: 1rem 1.75rem;
@@ -211,89 +211,134 @@ html { scroll-behavior: smooth; }
  
   /* WORK */
   .work-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--border);
-    border: 1px solid var(--border); border-radius: 0.85rem; overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
-  .case-card {
+  .work-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .work-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(26,92,58,0.08);
+  }
+  .work-card.featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+  .work-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
     background: var(--bg-card);
-    background-size: cover;
-    background-position: center;
-    padding: clamp(1.75rem, 4vw, 2.75rem);
-    position: relative; overflow: hidden; cursor: pointer;
-    text-decoration: none; color: inherit;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    min-height: 340px;
-    transition: opacity 0.2s;
+    flex-shrink: 0;
   }
-  .case-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(10,12,10,0.96) 50%, rgba(10,12,10,0.65) 100%);
-    z-index: 0;
-    transition: opacity 0.2s;
+  .work-card.featured .work-card-image {
+    width: 48%;
+    aspect-ratio: auto;
   }
-  .case-card:hover::before {
-    background: linear-gradient(to top, rgba(10,12,10,0.94) 40%, rgba(10,12,10,0.45) 100%);
+  .work-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
   }
-  .case-card > * { position: relative; z-index: 1; }
-  .case-card .case-number { color: rgba(255,255,255,0.25); }
-  .case-card .tag { border-color: rgba(255,255,255,0.55); color: rgba(255,255,255,0.55); }
-  .case-card .case-title { color: #fff; }
-  .case-card .case-desc { color: rgba(255,255,255,0.6); }
-  .case-card .case-arrow { color: #1a5c3a; }
-  .case-card.featured {
-    grid-column: 1 / -1; min-height: 400px;
-    background: var(--grey); color: #fff;
+  .work-card:hover .work-card-image img {
+    filter: grayscale(0%);
+    transform: scale(1.02);
   }
-  .case-card.featured:hover { background: var(--grey); }
-  .case-number {
-    position: absolute; top: 1.75rem; right: 2rem;
-    font-family: var(--display); font-size: 0.65rem;
-    letter-spacing: 0.12em; color: var(--text-dim); font-weight: 600;
+  .work-card-body {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.8rem;
   }
-  .case-card.featured .case-number { color: rgba(255,255,255,0.25); }
-  .case-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
-  .tag {
-    font-size: 0.65rem; letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 0.22rem 0.6rem; border: 1px solid var(--border-md);
-    color: var(--text-mid); border-radius: 0.25rem;
-    font-family: var(--sans);
+  .work-card-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
   }
-  .case-card.featured .tag { border-color: rgba(255,255,255,0.55); color: rgba(255,255,255,0.55); }
-  .case-title {
+  .work-card-num {
     font-family: var(--display);
-    font-size: clamp(1.2rem, 2.2vw, 1.75rem);
-    line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
-    margin-bottom: 0.75rem; color: var(--text);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    padding-top: 0.15rem;
+    flex-shrink: 0;
   }
-  .case-card.featured .case-title { color: #fff; }
-  .case-desc {
-    font-size: 0.875rem; line-height: 1.65; color: var(--text-mid);
-    max-width: 52ch; font-weight: 300;
+  .work-card-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
-  .case-card.featured .case-desc { color: rgba(255,255,255,0.55); }
-  .case-arrow {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    margin-top: 1.5rem;
-    padding: 0.6rem 1.25rem;
-    background: #ffffff;
-    color: var(--accent);
+  .work-card-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 2rem;
+    font-family: var(--sans);
+    background: var(--bg-surface);
+  }
+  .work-card-title {
+    font-family: var(--display);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+  }
+  .work-card-divider {
+    width: 2rem;
+    height: 2px;
+    background: var(--accent);
     border: none;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .work-card-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    font-weight: 300;
+    flex: 1;
+  }
+  .work-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    padding: 0.65rem 1.25rem;
+    background: var(--accent);
+    color: #fff;
     border-radius: 0.4rem;
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    text-decoration: none;
     font-family: var(--sans);
     width: fit-content;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s;
   }
-  .case-arrow:hover { background: var(--accent-bg); color: var(--accent); }
-  .case-card.featured .case-arrow { color: var(--accent); }
-  .case-card:hover .case-arrow { background: var(--accent-bg); }
+  .work-card:hover .work-card-cta { background: #134a2e; }
  
   /* CLIENTS */
   .clients-grid {
@@ -452,15 +497,15 @@ html { scroll-behavior: smooth; }
  
   /* RESPONSIVE */
   @media (max-width: 860px) {
+    .work-card.featured { flex-direction: column; }
+    .work-card.featured .work-card-image { width: 100%; aspect-ratio: 16/9; }
     .clients-grid { grid-template-columns: repeat(3, 1fr); }
     .disciplines-inner { justify-content: flex-start; }
     .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
   }
   @media (max-width: 720px) {
     .hero-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
-    .case-card.featured { grid-column: auto; }
-    .work-grid { background: none; gap: 0.75rem; }
-    .case-card { border-radius: 0.6rem; border: 1px solid var(--border); }
+    .work-grid { gap: 1rem; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
   }
@@ -505,10 +550,10 @@ html { scroll-behavior: smooth; }
   outline-offset: 2px;
 }
 
-/* BACK TO TOP */
-.back-to-top {
+ /* BACK TO TOP */
+  .back-to-top {
   position: fixed;
-  bottom: 0;
+  bottom: -100%;
   right: 1rem;
   background: var(--accent);
   color: #fff;
@@ -521,10 +566,9 @@ html { scroll-behavior: smooth; }
   border-radius: 0.25rem 0.25rem 0 0;
   border: none;
   cursor: pointer;
-  transform: translateY(calc(100% + 4px));
-  transition: transform 0.2s ease;
+  transition: bottom 0.2s;
 }
-.back-to-top.visible { transform: translateY(0); }
+.back-to-top.visible { bottom: 0; }
 .back-to-top:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
@@ -538,8 +582,6 @@ html { scroll-behavior: smooth; }
   }
   /* Remove default outline only when focus-visible is supported */
   :focus:not(:focus-visible) { outline: none; }
-  [tabindex="-1"]:focus,
-  [tabindex="-1"]:focus-visible { outline: none; }
 
   /* Ensure links within text are visually distinguishable */
   .contact-para a { color: var(--accent); text-decoration: underline; }
@@ -625,39 +667,82 @@ html { scroll-behavior: smooth; }
       <p class="contact-para">I'm unable to showcase my government work publicly due to strict confidentiality rules. If you want to view this work, <a href="#contact">get in touch</a>.</p>
     </div>
     <div class="work-grid">
-      <a href="case-study-three-mobile.html" aria-label="View case study: Three Mobile website design" class="case-card featured fade-in" style="background-image: url('three-mobile.webp');">
-        <span class="case-number"><strong>01</strong></span>
-        <div class="case-tags">
-          <span class="tag">UX design</span>
-          <span class="tag">Content design</span>
-          <span class="tag">End-to-end design</span>
+
+      <!-- Card 01 — featured, image left -->
+      <a href="case-study-three-mobile.html"
+         class="work-card featured fade-in"
+         aria-label="View case study: Three Mobile website design">
+        <div class="work-card-image">
+          <img src="three-mobile.webp"
+               alt="Three Mobile UK homepage showing 5G campaign"
+               loading="lazy">
         </div>
-        <h3 class="case-title">Website design for an international<br>telecommunications organisation</h3>
-        <p class="case-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
-        <span class="case-arrow">View case study →</span>
-      </a>
-      <a href="case-study-uog.html" aria-label="View case study: University of Glasgow website wireframe and design" class="case-card fade-in" style="background-image: url('uog-wireframe.webp');">
-        <span class="case-number"><strong>02</strong></span>
-        <div class="case-tags">
-          <span class="tag">UX design</span>
-          <span class="tag">Website design</span>
-          <span class="tag">Service design</span>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">01</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Content design</span>
+              <span class="work-card-tag">End-to-end design</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Website design for an international telecommunications organisation</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
+          <span class="work-card-cta">View case study →</span>
         </div>
-        <h3 class="case-title">Wireframe and design for the world's 4th-oldest university</h3>
-        <p class="case-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
-        <span class="case-arrow">View case study →</span>
       </a>
-      <a href="case-study-hilton.html" aria-label="View case study: Hilton Hotel Group article series design" class="case-card fade-in" style="background-image: url('hilton-hotel.webp');">
-        <span class="case-number"><strong>03</strong></span>
-        <div class="case-tags">
-          <span class="tag">UX design</span>
-          <span class="tag">Content design</span>
-          <span class="tag">Research</span>
+
+      <!-- Card 02 -->
+      <a href="case-study-uog.html"
+         class="work-card fade-in"
+         aria-label="View case study: University of Glasgow wireframe and website design">
+        <div class="work-card-image">
+          <img src="uog-wireframe.webp"
+               alt="University of Glasgow internal marketing intelligence website wireframes"
+               loading="lazy">
         </div>
-        <h3 class="case-title">Design a series of articles for a renowned global hotel group</h3>
-        <p class="case-desc">Research, write and design articles to be published across the group websites promoting hotels in locations including the USA and Scotland.</p>
-        <span class="case-arrow">View case study →</span>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">02</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Website design</span>
+              <span class="work-card-tag">Service design</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Wireframe and design for the world's 4th-oldest university</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
+          <span class="work-card-cta">View case study →</span>
+        </div>
       </a>
+
+      <!-- Card 03 -->
+      <a href="case-study-hilton.html"
+         class="work-card fade-in"
+         aria-label="View case study: Hilton Hotel Group article design">
+        <div class="work-card-image">
+          <img src="hilton-hotel.webp"
+               alt="Hilton Waikoloa Village hotel exterior and grounds"
+               loading="lazy">
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">03</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Content design</span>
+              <span class="work-card-tag">Research</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Design a series of articles for a renowned global hotel group</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Research, write and design articles to be published across the group websites promoting hotels in locations including the USA and Scotland.</p>
+          <span class="work-card-cta">View case study →</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -716,8 +801,8 @@ html { scroll-behavior: smooth; }
         <div class="approach-step fade-in">
           <span class="step-num">05</span>
           <div class="step-body">
-            <h3>Delivering the work</h3>
-            <p>The implementation of work and handing over all materials is prepared to ensure a seamless transition and successful project completion.</p>
+            <h3>Delivery of work</h3>
+            <p>The handover of work, along with all project materials, is prepared to ensure a seamless transition and successful project completion.</p>
           </div>
         </div>
       </div>
@@ -754,7 +839,6 @@ html { scroll-behavior: smooth; }
           <li>expertise in understanding complex services</li>
           <li>creating prototype products to test with users</li>
         </ul>
-        <br>
         <hr>
         <br>
         <h3>Design philosophy</h3> 
