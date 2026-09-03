@@ -247,9 +247,12 @@ html { scroll-behavior: smooth; }
   }
   .work-card.featured .work-card-image {
     width: 48%;
+    height: auto;
     aspect-ratio: auto;
+    align-self: center;
     border-bottom: none;
     border-right: 1px solid var(--border-md);
+    display: flex;
   }
   .work-card-image img {
     width: 100%;
@@ -260,11 +263,12 @@ html { scroll-behavior: smooth; }
     filter: grayscale(100%) contrast(1.02);
     transition: transform 0.4s ease;
   }
-  /* Featured tile: scale image to fit and show the full homepage rather than cropping */
+  /* Featured tile: let the image sit at its own natural proportions (no crop, no letterbox bars) */
   .work-card.featured .work-card-image img {
-    object-fit: contain;
-    object-position: center;
-    background: var(--grey);
+    width: 100%;
+    height: auto;
+    object-fit: initial;
+    background: none;
   }
   /* Subtle tinted overlay keeps images visually separate from the text below,
      while a soft edge-vignette sharpens where the image ends and the tile continues */
@@ -348,6 +352,7 @@ html { scroll-behavior: smooth; }
     align-items: center;
     gap: 0.5rem;
     margin-top: 0.25rem;
+    margin-left: auto;
     padding: 0.65rem 1.25rem;
     background: var(--accent);
     color: #fff;
@@ -522,7 +527,8 @@ html { scroll-behavior: smooth; }
     .work-card.featured { flex-direction: column; }
     .work-card.featured .work-card-image {
       width: 100%;
-      aspect-ratio: 16/9;
+      height: auto;
+      align-self: stretch;
       border-right: none;
       border-bottom: 1px solid var(--border-md);
     }
