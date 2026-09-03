@@ -213,22 +213,24 @@ html { scroll-behavior: smooth; }
   .work-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
   }
   .work-card {
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 0.85rem;
+    border: 1px solid var(--border-md);
+    border-radius: 0.6rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(26,28,26,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
   .work-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 4px 24px rgba(26,92,58,0.08);
+    box-shadow: 0 10px 28px rgba(26,92,58,0.12);
+    transform: translateY(-2px);
   }
   .work-card.featured {
     grid-column: 1 / -1;
@@ -238,12 +240,16 @@ html { scroll-behavior: smooth; }
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: var(--bg-card);
+    position: relative;
+    background: var(--grey);
     flex-shrink: 0;
+    border-bottom: 1px solid var(--border-md);
   }
   .work-card.featured .work-card-image {
     width: 48%;
     aspect-ratio: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--border-md);
   }
   .work-card-image img {
     width: 100%;
@@ -251,19 +257,35 @@ html { scroll-behavior: smooth; }
     object-fit: cover;
     object-position: top center;
     display: block;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, transform 0.3s ease;
+    filter: grayscale(100%) contrast(1.02);
+    transition: transform 0.4s ease;
+  }
+  /* Featured tile: scale image to fit and show the full homepage rather than cropping */
+  .work-card.featured .work-card-image img {
+    object-fit: contain;
+    object-position: center;
+    background: var(--grey);
+  }
+  /* Subtle tinted overlay keeps images visually separate from the text below,
+     while a soft edge-vignette sharpens where the image ends and the tile continues */
+  .work-card-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26,28,26,0.06) 0%, rgba(26,28,26,0.16) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
   }
   .work-card:hover .work-card-image img {
-    filter: grayscale(0%);
-    transform: scale(1.02);
+    transform: scale(1.03);
   }
   .work-card-body {
-    padding: 1.75rem;
+    padding: 2rem 1.75rem 1.75rem;
     display: flex;
     flex-direction: column;
     flex: 1;
     gap: 0.8rem;
+    background: var(--bg);
   }
   .work-card-meta {
     display: flex;
@@ -292,7 +314,7 @@ html { scroll-behavior: smooth; }
     text-transform: uppercase;
     padding: 0.2rem 0.55rem;
     border: 1px solid var(--border);
-    color: #1a5c3a;
+    color: var(--text-dim);
     border-radius: 2rem;
     font-family: var(--sans);
     background: var(--bg-surface);
@@ -336,7 +358,6 @@ html { scroll-behavior: smooth; }
     text-transform: uppercase;
     font-family: var(--sans);
     width: fit-content;
-    align-self: flex-end;
     transition: background 0.2s;
   }
   .work-card:hover .work-card-cta { background: #134a2e; }
@@ -499,7 +520,12 @@ html { scroll-behavior: smooth; }
   /* RESPONSIVE */
   @media (max-width: 860px) {
     .work-card.featured { flex-direction: column; }
-    .work-card.featured .work-card-image { width: 100%; aspect-ratio: 16/9; }
+    .work-card.featured .work-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-right: none;
+      border-bottom: 1px solid var(--border-md);
+    }
     .clients-grid { grid-template-columns: repeat(3, 1fr); }
     .disciplines-inner { justify-content: flex-start; }
     .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
