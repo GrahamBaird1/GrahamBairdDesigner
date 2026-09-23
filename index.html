@@ -1,1262 +1,1135 @@
-<!doctype html>
-<html lang="en-GB">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Graham Baird — Senior Digital Designer specialising in UX, UI, content and service design.">
-  <title>Graham Baird — Senior Digital Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="gbfavicon.svg">
+<link rel="icon" type="image/png" href="gbfavicon.svg">
+<link rel="apple-touch-icon" href="gbfavicon.svg">
+<title>Graham Baird — Freelance Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --bg:         #ffffff;
+    --bg-surface: #eaf2ec;
+    --bg-card:    #f0f1ee;
+    --bg-hover:   #e8eae6;
+    --border:     #e0e2de;
+    --border-md:  #c4c8c0;
+    --text:       #1a1c1a;
+    --text-mid:   #565a54;
+    --text-dim:   #727072;
+    --accent:     #1a5c3a;
+    --accent-bg:  #eaf2ec;
+    --accent-mid: #2e8a58;
+    --grey:       #2a2d28;
+    --sans:       'Inter', system-ui, sans-serif;
+    --display:    'Plus Jakarta Sans', system-ui, sans-serif;
+    --max:        1100px;
+    --gap:        clamp(2rem, 5vw, 5rem);
+  }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
 
-  <style>
-    :root{
-      --green:#155c48;
-      --green-2:#0f4e3c;
-      --green-pale:#eef5f1;
-      --green-pale-2:#e6f0eb;
-      --ink:#152321;
-      --body:#53635f;
-      --muted:#70807b;
-      --line:#dce6e1;
-      --white:#fff;
-      --max:1100px;
-      --display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
-      --sans:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    }
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 0px solid var(--border);
+    padding: 1.1rem 0;
+  }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name {
+    font-family: var(--display);
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; color: var(--text-mid); text-decoration: none;
+    letter-spacing: 0.05em; text-transform: uppercase; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+ 
+  /* HAMBURGER — mobile only */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:70px}
-    body{
-      margin:0;
-      color:var(--ink);
-      background:#fff;
-      font-family:var(--sans);
-      font-size:14px;
-      line-height:1.55;
-      -webkit-font-smoothing:antialiased;
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--bg);
+    border-bottom: 0px solid var(--border);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 56px;
+    z-index: 99;
+  }
+  .mobile-menu a {
+    padding: 0.9rem clamp(1.25rem, 5vw, 3rem);
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-family: var(--sans);
+    border-bottom: 0px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--text); }
+  .mobile-menu.open { display: flex; }
+ 
+  /* HERO */
+  .hero {
+    padding: clamp(5rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 7rem);
+    border-bottom: 0px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -5%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(26,92,58,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--gap); align-items: end;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 1.5rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--accent-bg);
+    border-radius: 2rem; width: fit-content;
+    font-family: var(--sans);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.04; letter-spacing: -0.03em; font-weight: 700;
+    color: var(--text);
+  }
+  .hero h1 .muted { color: var(--text-dim); }
+  .hero-desc {
+    font-size: 1rem; color: var(--text-mid); line-height: 1.8;
+    margin-bottom: 2.25rem; font-weight: 300; max-width: 40ch;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 400; }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+ 
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem; border-radius: 0.4rem;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.01em;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+    font-family: var(--sans); border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #134a2e; }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-md); }
+  .btn-secondary:hover { border-color: var(--text-mid); background: var(--bg-surface); }
+ 
+  /* DISCIPLINES */
+  .disciplines { border-bottom: 0px solid var(--border); overflow: hidden; background: var(--bg-surface); }
+  .disciplines-inner { display: flex; overflow-x: auto; scrollbar-width: none; justify-content: center; }
+  .disciplines-inner::-webkit-scrollbar { display: none; }
+  .disciplines-inner:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
+  }
+  .discipline-item {
+    flex-shrink: 0; padding: 1rem 1.75rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); border-right: 1px solid var(--border);
+    white-space: nowrap; transition: color 0.2s;
+    font-family: var(--sans);
+  }
+  .discipline-item:first-child { padding-left: 1.75rem; border-left: 1px solid var(--border); }
+  .discipline-item.active { color: var(--accent); font-weight: 500; }
+  .discipline-item:hover { color: var(--text-mid); }
+ 
+  /* SECTIONS */
+  section { padding: clamp(4rem, 9vw, 7rem) 0; border-bottom: 0px solid var(--border); }
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-dim); font-weight: 500;
+    font-family: var(--sans);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    letter-spacing: -0.03em; line-height: 1.08; font-weight: 700; color: var(--text);
+  }
+ 
+  /* WORK */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  }
+  .work-card {
+    background: var(--bg);
+    border: 1px solid var(--border-md);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 1px 2px rgba(26,28,26,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .work-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 10px 28px rgba(26,92,58,0.12);
+    transform: translateY(-2px);
+  }
+  .work-card.featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+  .work-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    background: var(--grey);
+    flex-shrink: 0;
+    border-bottom: 0px solid var(--border-md);
+  }
+  .work-card.featured .work-card-image {
+    width: 48%;
+    height: auto;
+    aspect-ratio: auto;
+    align-self: center;
+    border-bottom: none;
+    border-right: 1px solid var(--border-md);
+    display: flex;
+  }
+  .work-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    filter: grayscale(100%) contrast(1.02);
+    transition: transform 0.4s ease;
+  }
+  /* Featured tile: let the image sit at its own natural proportions (no crop, no letterbox bars) */
+  .work-card.featured .work-card-image img {
+    width: 100%;
+    height: auto;
+    object-fit: initial;
+    background: none;
+  }
+  /* Subtle tinted overlay keeps images visually separate from the text below,
+     while a soft edge-vignette sharpens where the image ends and the tile continues */
+  .work-card-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26,28,26,0.06) 0%, rgba(26,28,26,0.16) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .work-card:hover .work-card-image img {
+    transform: scale(1.03);
+  }
+  .work-card-body {
+    padding: 2rem 1.75rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.8rem;
+    background: var(--bg);
+  }
+  .work-card-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .work-card-num {
+    font-family: var(--display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    padding-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .work-card-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .work-card-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    color: #1a5c3a;
+    border-radius: 2rem;
+    font-family: var(--sans);
+    background: var(--bg-surface);
+  }
+  .work-card-title {
+    font-family: var(--display);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+  }
+  .work-card-divider {
+    width: 2rem;
+    height: 2px;
+    background: var(--accent);
+    border: none;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .work-card-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    font-weight: 300;
+    flex: 1;
+  }
+  .work-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    margin-left: auto;
+    padding: 0.65rem 1.25rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    width: fit-content;
+    transition: background 0.2s;
+  }
+  .work-card:hover .work-card-cta { background: #134a2e; }
+ 
+  /* ALSO WORKED ON */
+  .also-worked-on { margin-top: clamp(3.75rem, 3.5vw, 2.75rem); }
+  .also-worked-on-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.65rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
+    color: var(--text);
+  }
+  .work-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+    row-gap: 3rem;
+  }
+  .work-item { border-left: 2px solid var(--border); padding-left: 1.25rem; }
+  .work-item .work-card-tag { display: inline-block; margin-bottom: 0.6rem; }
+  .work-item-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .work-item-desc { font-size: 0.85rem; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+ 
+  /* CLIENTS */
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    background: none; border: none; border-radius: 0;
+  }
+  .client-logo {
+    background: none; aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center; padding: 0;
+  }
+  .client-logo img {
+    width: 110%; height: 90px; object-fit: contain;
+    display: block; margin: 0 auto;
+    filter: grayscale(100%); opacity: 0.45;
+    transition: opacity 0.2s, filter 0.2s;
+  }
+  .client-logo:hover img { opacity: 0.85; filter: grayscale(0%); }
+ 
+  /* APPROACH */
+  .approach-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .approach-steps { display: flex; flex-direction: column; }
+  .approach-step {
+    padding: 1.75rem 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 2.5rem 1fr;
+    gap: 1.5rem; align-items: start; transition: border-color 0.2s;
+  }
+  .approach-step:hover { border-color: var(--border-md); }
+  .step-num {
+    font-family: var(--display); font-size: 0.7rem;
+    color: var(--text-dim); font-weight: 600; letter-spacing: 0.04em; padding-top: 0.2rem;
+  }
+  .step-body h3 {
+    font-family: var(--display); font-size: 1.1rem;
+    letter-spacing: -0.02em; font-weight: 700;
+    margin-bottom: 0.5rem; color: var(--text);
+  }
+  .step-body p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+ 
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 260px 1fr 200px; gap: var(--gap); align-items: start; }
+  .about-image { position: static; }
+  .about-image img {
+    width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+    border-radius: 0.5rem; display: block; background: var(--bg-card);
+  }
+  .about-image-placeholder {
+    width: 100%; aspect-ratio: 3 / 4; border-radius: 0.5rem;
+    background: var(--bg-card); border: 1px dashed var(--border-md);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 0.6rem; color: var(--text-dim);
+  }
+  .about-image-placeholder svg { opacity: 0.4; }
+  .about-image-placeholder span {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: var(--sans); opacity: 0.5;
+  }
+  .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-list {
+    list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .about-list li { font-size: 1rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; padding-left: 0; }
+  .about-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
+  .sidebar-block h4 {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 1rem; font-weight: 500;
+    font-family: var(--sans);
+  }
+  .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .sidebar-list li {
+    font-size: 0.875rem; color: var(--text-mid);
+    padding-left: 1rem; position: relative; font-weight: 300;
+  }
+  .sidebar-list li::before {
+    content: ''; position: absolute; left: 0; top: 0.62em;
+    width: 4px; height: 4px; border-radius: 50%; background: var(--border-md);
+  }
+  .sidebar-note { font-size: 0.8rem; color: var(--text-mid); font-weight: 300; margin-top: 0.75rem; }
+  .sidebar-note a { color: var(--accent); }
+ 
+  /* CONTACT */
+  .contact-inner {
+    display: flex; flex-direction: column; gap: 1.25rem; max-width: none;
+  }
+  .contact-heading {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    letter-spacing: -0.03em; line-height: 1.08; font-weight: 700;
+    color: var(--text);
+  }
+  .contact-para {
+    font-size: 0.95rem; color: var(--text-mid); font-weight: 300; line-height: 1.7;
+  }
+  .contact-email {
+    font-family: var(--display); font-size: 1.1rem; font-weight: 700;
+    color: var(--accent); text-decoration: none; letter-spacing: -0.02em;
+    transition: opacity 0.2s; display: block;
+  }
+  .contact-email:hover { opacity: 0.7; }
+  .contact-phone { font-size: 0.95rem; color: var(--text-mid); font-weight: 300; }
+  .social-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .social-links a {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    font-family: var(--sans);
+  }
+  .social-links a:hover { color: var(--text-mid); }
+ 
+  /* MEMBERSHIPS */
+  .memberships {
+    display: flex; gap: 1.5rem; margin-top: 0;
+    align-items: center; flex-wrap: wrap;
+  }
+  .membership-item {
+    flex: 1; height: 100px; background: none; border: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .membership-item img {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    filter: grayscale(100%); opacity: 0.45;
+    transition: opacity 0.2s, filter 0.2s;
+  }
+  .membership-item:hover img { opacity: 0.85; filter: grayscale(0%); }
+ 
+  /* CTA BOX */
+  .cta-box {
+    border: 1px solid var(--border); border-radius: 0.75rem;
+    background: var(--bg-surface); overflow: hidden;
+  }
+  .cta-box-inner {
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .cta-box-heading {
+    font-family: var(--display); font-size: 1rem; font-weight: 700;
+    color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.35rem;
+  }
+  .cta-box-sub {
+    font-size: 0.875rem; color: var(--text-mid); font-weight: 300;
+    line-height: 1.6; margin-bottom: 0;
+  }
+  .cta-box-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+ 
+  /* FOOTER */
+  footer { padding: 2rem 0; background: var(--bg-surface); border-top: 1px solid var(--border); }
+  .footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.02em;
+  }
+ 
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .work-card.featured { flex-direction: column; }
+    .work-card.featured .work-card-image {
+      width: 100%;
+      height: auto;
+      align-self: stretch;
+      border-right: none;
+      border-bottom: 0px solid var(--border-md);
     }
-    img{max-width:100%;display:block}
-    a{color:inherit}
-    button,a{font:inherit}
-    a:focus-visible,button:focus-visible{
-      outline:3px solid #9bd3bd;
-      outline-offset:4px;
-      border-radius:4px;
-    }
+    .clients-grid { grid-template-columns: repeat(3, 1fr); }
+    .disciplines-inner { justify-content: flex-start; }
+    .discipline-item:first-child { padding-left: clamp(1.25rem, 5vw, 3rem); border-left: none; }
+  }
+  @media (max-width: 720px) {
+    .hero-grid, .work-grid, .about-grid, .work-items { grid-template-columns: 1fr; }
+    .work-grid { gap: 1rem; }
+    .work-card-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .work-card-tags { justify-content: flex-start; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+  @media (max-width: 480px) {
+    .clients-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 
-    .skip-link{
-      position:fixed;
-      top:-100px;
-      left:14px;
-      z-index:1000;
-      padding:10px 14px;
-      color:#fff;
-      background:#10201c;
-      text-decoration:none;
-      font-weight:700;
-      border-radius:0 0 6px 6px;
-    }
-    .skip-link:focus{top:0}
+  /* ── ACCESSIBILITY ── */
+  /* Skip link */
+  .skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  text-decoration: none;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 10000;
+  border-radius: 0 0 0.25rem 0.25rem;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
 
-    .container{
-      width:min(80.5%,824px);
-      margin-inline:auto;
-    }
+ /* BACK TO TOP */
+  .back-to-top {
+  position: fixed;
+  bottom: -100%;
+  right: 1rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border: none;
+  cursor: pointer;
+  transition: bottom 0.2s;
+}
+.back-to-top.visible { bottom: 0; }
+.back-to-top:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
 
-    /* Header */
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:100;
-      height:39px;
-      background:rgba(255,255,255,.94);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(220,230,225,.25);
-    }
-    .nav{
-      height:39px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .brand{
-      font-family:var(--display);
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:-.03em;
-      text-decoration:none;
-    }
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      list-style:none;
-      padding:0;
-      margin:0;
-    }
-    .nav-links a{
-      font-size:7px;
-      line-height:1;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      text-decoration:none;
-      color:#25322f;
-    }
-    .nav-links a:hover{color:var(--green)}
-    .menu-button{
-      display:none;
-      width:38px;
-      height:38px;
-      padding:0;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:7px;
-      cursor:pointer;
-    }
-    .menu-button span,
-    .menu-button::before,
-    .menu-button::after{
-      content:"";
-      display:block;
-      width:17px;
-      height:1.5px;
-      margin:4px auto;
-      background:var(--ink);
-    }
+  /* Global focus-visible styles */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* Remove default outline only when focus-visible is supported */
+  :focus:not(:focus-visible) { outline: none; }
 
-    /* Hero */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(ellipse at 76% 56%,rgba(202,224,214,.62) 0 23%,transparent 24%),
-        linear-gradient(120deg,#fff 0 52%,#f1f7f4 52% 100%);
-    }
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:520px;
-      height:520px;
-      right:-230px;
-      top:-190px;
-      border-radius:50%;
-      border:82px solid rgba(213,232,224,.6);
-      pointer-events:none;
-    }
-    .hero-grid{
-      position:relative;
-      z-index:1;
-      height:328px;
-      display:grid;
-      grid-template-columns:1fr 1.12fr;
-      gap:32px;
-      align-items:center;
-    }
-    .eyebrow{
-      display:inline-flex;
-      padding:6px 11px;
-      border-radius:999px;
-      background:#e6f0eb;
-      color:var(--green);
-      font-size:7px;
-      font-weight:800;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    h1,h2,h3{
-      font-family:var(--display);
-      letter-spacing:-.04em;
-      margin:0;
-    }
-    .hero h1{
-      max-width:430px;
-      margin:14px 0 13px;
-      font-size:42px;
-      line-height:1.03;
-      font-weight:600;
-    }
-    .hero h1 em{
-      color:var(--green);
-      font-style:normal;
-    }
-    .hero-copy{
-      max-width:370px;
-      margin:0 0 9px;
-      color:#455651;
-      font-size:10px;
-      line-height:1.48;
-    }
-    .hero-actions{
-      display:flex;
-      gap:9px;
-      margin-top:13px;
-      flex-wrap:wrap;
-    }
-    .button{
-      min-height:29px;
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      padding:0 14px;
-      border-radius:999px;
-      font-size:8px;
-      font-weight:700;
-      text-decoration:none;
-      transition:transform .2s,background .2s,border-color .2s;
-    }
-    .button:hover{transform:translateY(-1px)}
-    .button-primary{color:#fff;background:var(--green)}
-    .button-primary:hover{background:var(--green-2)}
-    .button-secondary{
-      color:var(--green);
-      background:#fff;
-      border:1px solid #7da99a;
-    }
-    .disciplines{
-      display:flex;
-      gap:11px;
-      margin-top:15px;
-      color:#61726c;
-      font-size:6px;
-      font-weight:700;
-      letter-spacing:.17em;
-      text-transform:uppercase;
-    }
-    .disciplines span+span::before{
-      content:"·";
-      margin-right:11px;
-      color:#9baca6;
-    }
+  /* Ensure links within text are visually distinguishable */
+  .contact-para a { color: var(--accent); text-decoration: underline; }
+  .contact-para a:hover { opacity: 0.8; }
 
-    /* Hero visual — deliberately built in HTML/CSS so it remains editable */
-    .hero-art{
-      position:relative;
-      height:300px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .laptop{
-      width:430px;
-      position:relative;
-      transform:translate(20px,4px);
-      filter:drop-shadow(0 17px 19px rgba(16,48,39,.18));
-    }
-    .laptop-screen{
-      aspect-ratio:16/10;
-      padding:7px;
-      background:#171b1a;
-      border-radius:8px 8px 5px 5px;
-    }
-    .screen-inner{
-      height:100%;
-      overflow:hidden;
-      background:#fff;
-      border-radius:2px;
-    }
-    .browser{
-      height:22px;
-      display:flex;
-      align-items:center;
-      gap:4px;
-      padding:0 7px;
-      border-bottom:1px solid #e3e8e6;
-      background:#f8faf9;
-    }
-    .browser i{
-      width:5px;height:5px;border-radius:50%;background:#a5b2ad;
-    }
-    .mock-browser-content{
-      padding:17px 25px;
-    }
-    .mock-logo{
-      font-size:5px;
-      color:#596863;
-      font-weight:700;
-    }
-    .mock-search{
-      height:13px;
-      width:58%;
-      margin:9px 0 14px;
-      border:1px solid #e1e7e4;
-      border-radius:2px;
-    }
-    .mock-heading{
-      width:54%;
-      font:700 17px/1 var(--display);
-      letter-spacing:-.05em;
-      margin-bottom:7px;
-    }
-    .mock-sub{
-      width:55%;
-      color:#6d7b76;
-      font-size:6px;
-      line-height:1.45;
-    }
-    .mock-field{
-      width:69%;
-      height:20px;
-      margin-top:10px;
-      border:1px solid #cfd9d5;
-      border-radius:2px;
-      position:relative;
-    }
-    .mock-field::after{
-      content:"Search";
-      position:absolute;
-      right:-1px;
-      top:-1px;
-      height:20px;
-      padding:0 10px;
-      display:flex;
-      align-items:center;
-      color:#fff;
-      background:var(--green);
-      font-size:5px;
-      font-weight:700;
-      border-radius:0 2px 2px 0;
-    }
-    .mock-popular{
-      margin-top:12px;
-      font-size:5px;
-      color:#65746f;
-    }
-    .mock-popular strong{display:block;margin-bottom:5px;color:#4a5954}
-    .mock-popular span{
-      display:inline-block;
-      margin-right:9px;
-      color:#4d9277;
-      font-size:5px;
-    }
-    .laptop-base{
-      width:106%;
-      height:9px;
-      margin-left:-3%;
-      background:linear-gradient(#aeb8b4,#7d8985);
-      border-radius:0 0 10px 10px;
-    }
-    .phone{
-      position:absolute;
-      right:0%;
-      bottom:14px;
-      width:92px;
-      padding:5px;
-      background:#171b1a;
-      border-radius:15px;
-      filter:drop-shadow(0 14px 15px rgba(16,48,39,.2));
-    }
-    .phone-screen{
-      aspect-ratio:9/18;
-      overflow:hidden;
-      padding:12px 8px;
-      background:#fff;
-      border-radius:10px;
-    }
-    .phone-top{
-      display:flex;
-      justify-content:space-between;
-      color:#68756f;
-      font-size:6px;
-    }
-    .phone-title{
-      margin-top:25px;
-      font:700 13px/1.02 var(--display);
-      letter-spacing:-.05em;
-    }
-    .phone-copy{
-      margin-top:6px;
-      color:#68756f;
-      font-size:5px;
-      line-height:1.4;
-    }
-    .phone-button{
-      margin-top:7px;
-      width:48px;
-      height:14px;
-      display:grid;
-      place-items:center;
-      color:#fff;
-      background:#6745e5;
-      border-radius:3px;
-      font-size:5px;
-      font-weight:700;
-    }
-    .phone-card{
-      height:58px;
-      margin-top:11px;
-      border-radius:6px;
-      background:linear-gradient(135deg,#d9d2ff,#f2efff);
-      position:relative;
-    }
-    .phone-card::after{
-      content:"";
-      position:absolute;
-      width:31px;height:42px;
-      right:14px;bottom:0;
-      border-radius:7px 7px 0 0;
-      background:linear-gradient(160deg,#8d75ee,#5140b9);
-    }
+  /* Ensure SVGs in buttons are hidden from assistive tech */
+  .btn svg { aria-hidden: true; }
 
-    /* Trust */
-    .trust{
-      background:#edf5f1;
-      border-bottom:1px solid #e2ebe7;
-    }
-    .trust-grid{
-      height:66px;
-      display:grid;
-      grid-template-columns:105px repeat(6,1fr);
-      align-items:center;
-      gap:16px;
-    }
-    .trust-label{
-      color:var(--green);
-      font-size:7px;
-      font-weight:800;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    .client{
-      height:38px;
-      padding-left:14px;
-      border-left:1px solid #9eafa9;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .client img{
-      width:100%;
-      max-width:115px;
-      height:38px;
-      object-fit:contain;
-      filter:grayscale(100%);
-      opacity:.78;
-    }
-
-    /* General sections */
-    section{scroll-margin-top:70px}
-    .section{
-      padding:22px 0;
-    }
-    .section-label{
-      display:block;
-      margin-bottom:8px;
-      color:var(--green);
-      font-size:7px;
-      font-weight:800;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-    }
-
-    /* Selected work — one horizontal row on desktop */
-    .work-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:25px;
-      margin-bottom:17px;
-    }
-    .work-head h2{
-      max-width:570px;
-      color:#103f35;
-      font-size:18px;
-      line-height:1.15;
-      font-weight:600;
-    }
-    .small-link{
-      color:var(--green);
-      font-size:7px;
-      font-weight:700;
-      text-decoration:underline;
-      text-underline-offset:3px;
-      white-space:nowrap;
-    }
-    .work-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
-      align-items:stretch;
-      grid-auto-flow:column;
-      grid-auto-columns:minmax(0,1fr);
-    }
-    .work-card{
-      min-width:0;
-      border:1px solid #dfe7e3;
-      border-radius:3px;
-      background:#fff;
-      overflow:hidden;
-      box-shadow:0 1px 3px rgba(18,47,38,.025);
-      transition:transform .2s,box-shadow .2s;
-    }
-    .work-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(18,47,38,.08);
-    }
-    .work-image{
-      height:97px;
-      overflow:hidden;
-      background:#e7eeeb;
-    }
-    .work-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-    }
-    .work-image.moj{background:#d9e5df}
-    .work-image.three{background:#5b3ce1}
-    .work-image.uog{background:#0b507c}
-    .work-image.hilton{background:#b8b9ba}
-    .work-body{
-      height:166px;
-      padding:9px 11px 10px;
-      display:flex;
-      flex-direction:column;
-    }
-    .work-client{
-      margin-bottom:4px;
-      font-size:8px;
-      font-weight:700;
-      color:#182320;
-    }
-    .work-title{
-      margin-bottom:7px;
-      font-size:7.5px;
-      line-height:1.38;
-      font-weight:600;
-    }
-    .work-desc{
-      color:#5b6964;
-      font-size:6px;
-      line-height:1.45;
-    }
-    .work-tags{
-      margin-top:auto;
-      padding-top:8px;
-      color:#75827e;
-      font-size:6px;
-      line-height:1.4;
-    }
-    .work-cta{
-      margin-top:8px;
-      color:var(--green);
-      font-size:6.2px;
-      font-weight:700;
-      text-decoration:underline;
-      text-underline-offset:2px;
-    }
-
-    /* What I do — one horizontal row on desktop */
-    .services-section{
-      background:#eef5f1;
-      height:175px;
-      padding:22px 0;
-    }
-    .services-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.12fr) repeat(5,minmax(0,1fr));
-      gap:18px;
-      align-items:start;
-      grid-auto-flow:column;
-      grid-auto-columns:minmax(0,1fr);
-    }
-    .services-intro h2{
-      color:#103f35;
-      max-width:210px;
-      font-size:18px;
-      line-height:1.1;
-      font-weight:600;
-    }
-    .services-intro p{
-      max-width:205px;
-      margin:11px 0 0;
-      color:#5a6a64;
-      font-size:6px;
-      line-height:1.55;
-    }
-    .service{
-      min-width:0;
-    }
-    .service-icon{
-      width:27px;height:27px;
-      display:grid;
-      place-items:center;
-      margin-bottom:8px;
-      border-radius:50%;
-      background:#e0eee8;
-      color:var(--green);
-    }
-    .service-icon svg{width:13px;height:13px}
-    .service h3{
-      margin-bottom:5px;
-      color:#183b33;
-      font-size:7px;
-      line-height:1.25;
-      letter-spacing:-.025em;
-    }
-    .service p{
-      margin:0;
-      color:#5d6d67;
-      font-size:6.2px;
-      line-height:1.5;
-    }
-
-    /* Approach */
-    #approach{height:138px;}
-    .approach-grid{
-      display:grid;
-      grid-template-columns:1.15fr 2.4fr;
-      gap:38px;
-      align-items:start;
-    }
-    .approach-title h2{
-      color:#103f35;
-      font-size:18px;
-      line-height:1.1;
-      font-weight:600;
-    }
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:21px;
-    }
-    .step{
-      min-width:0;
-    }
-    .step-number{
-      width:25px;height:25px;
-      display:grid;
-      place-items:center;
-      margin-bottom:8px;
-      border-radius:50%;
-      background:#edf4f1;
-      color:var(--green);
-      font-size:7px;
-      font-weight:800;
-    }
-    .step h3{
-      margin-bottom:5px;
-      color:#183b33;
-      font-size:8px;
-      line-height:1.2;
-    }
-    .step p{
-      margin:0;
-      color:#5c6c66;
-      font-size:6.2px;
-      line-height:1.5;
-    }
-
-    /* Why work with me — one horizontal row on desktop */
-    .experience{
-      background:#eef5f1;
-      height:138px;
-      padding:20px 0;
-    }
-    .experience-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.2fr) repeat(4,minmax(0,1fr));
-      gap:19px;
-      align-items:start;
-      grid-auto-flow:column;
-      grid-auto-columns:minmax(0,1fr);
-    }
-    .experience-intro h2{
-      color:#103f35;
-      max-width:225px;
-      font-size:19px;
-      line-height:1.1;
-      font-weight:600;
-    }
-    .experience-intro p{
-      max-width:230px;
-      margin:10px 0 0;
-      color:#5c6c66;
-      font-size:6px;
-      line-height:1.45;
-    }
-    .stat{
-      padding-left:15px;
-      border-left:1px solid #d5e1dc;
-    }
-    .stat-icon{
-      width:27px;height:27px;
-      display:grid;
-      place-items:center;
-      margin-bottom:7px;
-      border-radius:50%;
-      background:#e0eee8;
-      color:var(--green);
-    }
-    .stat-icon svg{width:12px;height:12px}
-    .stat strong{
-      display:block;
-      margin-bottom:3px;
-      color:#153c32;
-      font-size:7px;
-      line-height:1.25;
-      font-weight:700;
-    }
-    .stat span{
-      display:block;
-      color:#61716b;
-      font-size:6.2px;
-      line-height:1.45;
-    }
-
-    /* About */
-    .about{
-      height:146px;
-      padding-top:16px;
-      padding-bottom:16px;
-    }
-    .about-grid{
-      display:grid;
-      grid-template-columns:145px 1fr 1fr;
-      gap:24px;
-      align-items:start;
-    }
-    .portrait{
-      width:145px;
-      height:114px;
-      border-radius:4px;
-      overflow:hidden;
-      background:#dbe5e0;
-    }
-    .portrait img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-    }
-    .about-copy h2{
-      color:#103f35;
-      font-size:18px;
-      line-height:1.05;
-      font-weight:600;
-      margin-bottom:8px;
-    }
-    .about-copy p{
-      margin:0 0 8px;
-      color:#5b6b65;
-      font-size:6px;
-      line-height:1.45;
-    }
-    .about-copy strong{
-      color:#174b3d;
-      font-weight:700;
-    }
-
-    /* Contact */
-    .contact{
-      height:88px;
-      padding:16px 0;
-      background:#0e5a47;
-      color:#fff;
-      position:relative;
-      overflow:hidden;
-    }
-    .contact::before{
-      content:"";
-      position:absolute;
-      width:250px;height:250px;
-      left:-85px;top:-110px;
-      border-radius:50%;
-      border:50px solid rgba(255,255,255,.035);
-    }
-    .contact-grid{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:1fr 1.35fr auto;
-      gap:31px;
-      align-items:center;
-    }
-    .contact .section-label{
-      color:#c4e0d5;
-      margin-bottom:8px;
-    }
-    .contact h2{
-      color:#fff;
-      font-size:18px;
-      line-height:1.05;
-      font-weight:600;
-    }
-    .contact p{
-      margin:0;
-      color:rgba(255,255,255,.82);
-      font-size:6px;
-      line-height:1.45;
-    }
-    .contact p+p{margin-top:6px}
-    .contact-actions{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      gap:8px;
-    }
-    .contact .button-primary{
-      color:#164a3d;
-      background:#fff;
-    }
-    .contact .button-secondary{
-      border-color:rgba(255,255,255,.35);
-      color:#fff;
-      background:transparent;
-    }
-    .socials{
-      display:flex;
-      gap:13px;
-      margin-top:5px;
-    }
-    .socials a{
-      color:#fff;
-      font-size:9px;
-      text-decoration:none;
-    }
-
-    footer{
-      background:#0b4b3b;
-      color:rgba(255,255,255,.65);
-      padding:5px 0;
-      font-size:6px;
-    }
-    .footer-inner{
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    /* Motion */
-    .reveal{
-      opacity:0;
-      transform:translateY(10px);
-      transition:opacity .55s ease,transform .55s ease;
-    }
-    .reveal.is-visible{opacity:1;transform:none}
-    @media (prefers-reduced-motion:reduce){
-      html{scroll-behavior:auto}
-      .reveal{opacity:1;transform:none;transition:none}
-      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-    }
-
-    /* Responsive */
-    
-    @media (max-width:900px){
-      .container{width:min(90%,var(--max))}
-      .site-header,.nav{height:54px}
-      .hero-grid{height:auto;min-height:auto;grid-template-columns:1fr;padding:45px 0 38px}
-      .hero h1{font-size:clamp(34px,7vw,48px)}
-      .services-section,#approach,.experience,.about,.contact{height:auto}
-      .services-section,.experience{padding:30px 0}
-      .about{padding:30px 0}
-      .contact{padding:28px 0}
-
-      .hero-grid{grid-template-columns:1fr;min-height:auto;padding:55px 0 45px}
-      .hero-art{height:270px}
-      .trust-grid{grid-template-columns:repeat(3,1fr);padding:12px 0}
-      .trust-label{grid-column:1/-1}
-      .client:nth-of-type(n+7){display:none}
-      .work-grid{grid-template-columns:repeat(2,1fr)}
-      .services-grid{grid-template-columns:repeat(3,1fr)}
-      .services-intro{grid-column:1/-1}
-      .approach-grid{grid-template-columns:1fr}
-      .experience-grid{grid-template-columns:repeat(2,1fr)}
-      .experience-intro{grid-column:1/-1}
-      .about-grid{grid-template-columns:145px 1fr}
-      .about-grid .about-copy:last-child{grid-column:2}
-      .contact-grid{grid-template-columns:1fr 1fr}
-      .contact-actions{grid-column:1/-1;flex-direction:row}
-    }
-
-    @media (max-width:650px){
-      body{font-size:15px}
-      .container{width:min(92%,var(--max))}
-      .site-header,.nav{height:60px}
-      .nav-links{
-        display:none;
-        position:absolute;
-        top:60px;
-        left:0;
-        right:0;
-        padding:12px 4%;
-        background:#fff;
-        border-bottom:1px solid var(--line);
-        flex-direction:column;
-        align-items:flex-start;
-        gap:0;
-      }
-      .nav-links.open{display:flex}
-      .nav-links li{width:100%}
-      .nav-links a{display:block;padding:13px 0;font-size:10px}
-      .menu-button{display:block}
-      .hero h1{font-size:42px}
-      .hero-art{height:225px}
-      .laptop{width:94%;transform:none}
-      .phone{width:79px}
-      .trust-grid{grid-template-columns:1fr 1fr}
-      .client:nth-of-type(n+4){display:none}
-      .work-grid,.services-grid,.steps,.experience-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
-      .work-card{min-height:0}
-      .services-intro,.experience-intro,.about-grid .about-copy:last-child,.contact-actions{grid-column:auto}
-      .service{border-top:1px solid #d5e2dc;padding-top:15px}
-      .about-grid .about-copy:last-child{margin-top:4px}
-      .portrait{width:160px;height:160px}
-      .contact-actions{flex-direction:row}
-      .footer-inner{flex-direction:column}
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#top">Graham Baird</a>
+<a href="#work" class="skip-link" id="skipLink">Skip to main content</a>
 
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
-        <span></span><span></span><span></span>
-      </button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top of page">↑ Back to top of page</button>
 
-      <nav aria-label="Primary navigation">
-        <ul class="nav-links" id="primary-navigation">
-          <li><a href="#work">Work</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#services">What I do</a></li>
-          <li><a href="#contact">Contact</a></li>
+
+<nav aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-name">Graham Baird</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Get in touch</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+ 
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden>
+  <a href="#work" onclick="closeMenu()">Work</a>
+  <a href="#clients" onclick="closeMenu()">Clients</a>
+  <a href="#approach" onclick="closeMenu()">Approach</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#contact" onclick="closeMenu()">Get in touch</a>
+</nav>
+ 
+<header class="hero" style="border-top: none;" aria-label="Site introduction">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">UX Designer</p>
+        <p class="hero-eyebrow">Service Designer</p>
+        <p class="hero-eyebrow">Content Designer</p>
+        <h1>Design that works for <span class="muted">everyone</span></h1>
+      </div>
+      <div>
+        <p class="hero-desc">
+          I'm Graham — a freelance, multidisciplinary, <strong>user-centred designer</strong> based in the United Kingdom.</p>
+        <p class="hero-desc">
+          I design <strong>end-to-end digital services</strong> — from inception to completion, while balancing both user and business needs to deliver successful results.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View work</a>
+          <a href="#contact" class="btn btn-secondary">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+ 
+<div class="disciplines" role="region" aria-label="Areas of expertise">
+  <div class="disciplines-inner" tabindex="0" role="region" aria-label="Scrollable list of design disciplines">
+    <span class="discipline-item">End-to-end design</span>
+    <span class="discipline-item">UX design</span>
+    <span class="discipline-item">Service design</span>
+    <span class="discipline-item">Content design</span>
+    <span class="discipline-item">User research</span>
+    <span class="discipline-item">UI design</span>
+  </div>
+</div>
+ 
+<main id="main-content">
+<section id="work" aria-labelledby="work-heading" tabindex="-1">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Selected work</span>
+      <h2 class="section-title" id="work-heading">Problems solved meticulously</h2>
+     <br>
+      <p class="contact-para">View examples of my commercial work that I've delivered to organisations in the private sector.</p>
+    </div>
+    <div class="work-grid">
+
+      <!-- Card 01 — featured, image left -->
+      <a href="case-study-three-mobile.html"
+         class="work-card featured fade-in"
+         aria-label="View case study: Three Mobile website design">
+        <div class="work-card-image">
+          <img src="three-mobile.webp"
+               alt="Three Mobile UK homepage showing 5G campaign"
+               loading="lazy">
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">01</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Content design</span>
+              <span class="work-card-tag">End-to-end design</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Website design for an international telecommunications organisation</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Overseeing the UX design and daily management of the UK website for Three Mobile across 12 months. Included ensuring the website was current and functional at all times.</p>
+          <span class="work-card-cta">View case study →</span>
+        </div>
+      </a>
+
+      <!-- Card 02 -->
+      <a href="case-study-uog.html"
+         class="work-card fade-in"
+         aria-label="View case study: University of Glasgow wireframe and website design">
+        <div class="work-card-image">
+          <img src="uog-wireframe.webp"
+               alt="University of Glasgow internal marketing intelligence website wireframes"
+               loading="lazy">
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">02</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Website design</span>
+              <span class="work-card-tag">Service design</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Wireframe and design for the world's 4th-oldest university</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Researching, scoping, planning and designing a new website for the internal marketing intelligence team operating within the University of Glasgow.</p>
+          <span class="work-card-cta">View case study →</span>
+        </div>
+      </a>
+
+      <!-- Card 03 -->
+      <a href="case-study-hilton.html"
+         class="work-card fade-in"
+         aria-label="View case study: Hilton Hotel Group article design">
+        <div class="work-card-image">
+          <img src="hilton-hotel.webp"
+               alt="Hilton Waikoloa Village hotel exterior and grounds"
+               loading="lazy">
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-meta">
+            <span class="work-card-num">03</span>
+            <div class="work-card-tags">
+              <span class="work-card-tag">UX design</span>
+              <span class="work-card-tag">Content design</span>
+              <span class="work-card-tag">Research</span>
+            </div>
+          </div>
+          <h3 class="work-card-title">Design a series of articles for a renowned global hotel group</h3>
+          <hr class="work-card-divider">
+          <p class="work-card-desc">Research, write and design articles to be published across the group websites promoting hotels in locations including the USA and Scotland.</p>
+          <span class="work-card-cta">View case study →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Card 04 -->
+    <div class="also-worked-on fade-in">
+      <h3 class="also-worked-on-title">Previous work delivered in the public sector</h3>
+      <div class="work-items">
+        <div class="work-item">
+          <span class="work-card-tag">Content design</span>
+          <span class="work-card-tag">Interaction design</span>
+          <span class="work-card-tag">Service design</span>
+          <p class="work-item-title">Designing a new community-led feature for the Ministry of Justice Design System to remove the working backlog</p>
+          <p class="work-item-desc">Using content, interaction and service design to explore, plan and design a new community contribution feature to help increase the development and maturity of the design system.</p>
+        </div>
+    <!-- Card 05 -->
+       <div class="work-item">
+          <span class="work-card-tag">Service design</span>
+          <span class="work-card-tag">UX design</span>
+          <span class="work-card-tag">User research</span>
+          <p class="work-item-title">Taking a service design first approach to help redesign e-bike usage throughout London</p>
+          <p class="work-item-desc">Leveraging service design to find a better way to manage the numerous e-bike programmes operating throughout the United Kingdom’s capital city of London.</p>
+        </div>
+     <!-- Card 06 -->
+        <div class="work-item">
+          <span class="work-card-tag">Service design</span>
+          <span class="work-card-tag">Content design</span>
+          <span class="work-card-tag">Interaction design</span>
+          <p class="work-item-title">Designing the online criminal injuries application for GOV.UK to help victims of crime access over £150 million in compensation</p>
+          <p class="work-item-desc">Facilitate the Criminal Injuries Compensation Authority (CICA) transition from using a legacy application system to a new online application that is hosted on the UK Government website at GOV.UK.</p>
+        </div>
+     <!-- Card 07 -->
+        <div class="work-item">
+          <span class="work-card-tag">Service design</span>
+          <span class="work-card-tag">Content design</span>
+          <span class="work-card-tag">Interaction design</span>
+          <p class="work-item-title">Designing and rolling out a new fraud reporting form for the Scottish Government</p>
+          <p class="work-item-desc">Planning, designing and building a new online form to sit on the Scottish Government website, mygov.scot, that enables the public to report benefit fraud against Social Security Scotland.</p>
+        </div>
+       </div>
+      <br>
+      <p class="contact-para">I'm unable to showcase my government work publicly due to strict confidentiality rules. If you'd like to see examples of my public sector work, <a href="https://www.grahambaird.com/" target="_blank" rel="noopener noreferrer">view my public sector portfolio ↗</a>, or <a href="#contact">get in touch</a>.</p>
+    </div>
+
+  </div>
+</section>
+ 
+<section id="clients" aria-labelledby="clients-heading">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Previous clients</span>
+      <h2 class="section-title" id="clients-heading">Tried, tested and trusted</h2>
+    </div>
+    <div class="clients-grid fade-in">
+      <div class="client-logo"><img src="logo-govuk.webp" alt="GOV.UK UK Government"></div>
+      <div class="client-logo"><img src="logo-hilton.webp" alt="Hilton Hotels & Resorts"></div> 
+      <div class="client-logo"><img src="logo-scottishgov.webp" alt="mygov.scot Scottish Government"></div>
+      <div class="client-logo"><img src="logo-uog.webp" alt="University of Glasgow"></div>
+      <div class="client-logo"><img src="logo-three.webp" alt="Three Mobile"></div>
+      <div class="client-logo"><img src="logo-newsinternational.webp" alt="News International"></div>     
+    </div>
+  </div>
+</section>
+ 
+<section id="approach" aria-labelledby="approach-heading">
+  <div class="container">
+    <div class="approach-grid">
+      <span class="section-label">Approach to work</span>
+      <h2 class="section-title fade-in" id="approach-heading" style="margin-bottom: 0.25rem;">Keep it informed, keep it simple</h2>
+      <div class="approach-steps" style="margin-top: 1rem;">
+        <div class="approach-step fade-in">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <h3>Understand the problem</h3>
+            <p>The process starts with data and research. Both of which form the insights used to make informed design decisions to set us up for success.</p>
+          </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <h3>Learn by prototyping</h3>
+            <p>Create low-fidelity designs early, iterate quickly, and reap the rewards in the long term. Prototypes answer the remaining questions.</p>
+          </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <h3>Designing holistically</h3>
+            <p>From analysing insights and defining user flows and journeys to considering edge cases, I design with the entire ecosystem in mind.</p>
+          </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">04</span>
+          <div class="step-body">
+            <h3>Expectation meets precision</h3>
+            <p>Through constant communication and close collaboration, there are no surprises at the end of the process – just what you've asked for.</p>
+          </div>
+        </div>
+        <div class="approach-step fade-in">
+          <span class="step-num">05</span>
+          <div class="step-body">
+            <h3>Delivery of work</h3>
+            <p>The handover of work, along with all project materials, is prepared to ensure a seamless transition and successful project completion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">About me</span>
+      <h2 class="section-title" id="about-heading">Hi, I'm Graham...</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-image fade-in">
+        <img src="Graham_Baird_profile.jpg" alt="Graham Baird" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      </div>
+      <div class="about-text fade-in">
+        <p>I'm a freelance, multidisciplinary, user-centred designer specialising in:</p>
+        <ul class="about-list">
+          <li>UX design</li>
+          <li>Service design</li>
+          <li>Content design</li>
+          <li>User research</li>
+          <li>End-to-end design</li>
+          <li>Digital transformations</li>
         </ul>
-      </nav>
+        <p>With 15 years of experience working on <strong>complex, high-stakes digital products</strong> spanning the complete design lifecycle, I have worked across the public and private sectors.</p>
+        <p>My expertise is in designing accessible, user-led services that meet people's needs and help them achieve their goals.</p>
+        <p>I have a comprehensive skill set that is wide-ranging and includes:</p>
+        <ul class="about-list">
+          <li>creating user-centred, end-to-end services for online and offline platforms</li>
+          <li>designing easy-to-read content in plain English that is understandable for all user groups</li>
+          <li>identifying, establishing and designing process maps, user flows, service maps and blueprints</li>
+          <li>developing user experiences enabling people to use products and services with ease</li>
+          <li>expertise in understanding complex products and services</li>
+          <li>creating prototype products to test with users</li>
+        </ul>
+        <hr>
+        <br>
+        <h3>Design philosophy</h3> 
+        <p>As a designer, I want to understand the intricacies of how things work, take this knowledge and turn it into a user-led solution. While also demonstrating the pragmatism that ensures the solutions meet business requirements. These aspects are of equal importance to me in designing services.</p>
+      </div>
+      <div class="about-sidebar fade-in">
+        <div class="sidebar-block">
+          <h4>Specialist areas</h4>
+          <ul class="sidebar-list">
+            <li>UX design</li>
+            <li>Service design</li>
+            <li>Interaction design</li>
+            <li>Content design</li>
+            <li>UI design</li>
+            <li>Copywriting</li>
+            <li>User research &amp; synthesis</li>
+            <li>Using design systems</li>
+            <li>Digital transformations</li>
+            <li>Stakeholder management</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>Languages</h4>
+          <ul class="sidebar-list">
+            <li>HTML</li>
+            <li>CSS</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>Software and apps</h4>
+          <ul class="sidebar-list">
+            <li>Figma</li>
+            <li>FigJam</li>
+            <li>Sketch</li>
+            <li>Adobe Creative Cloud</li>
+            <li>Miro</li>
+            <li>Mural</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>CMS</h4>
+          <ul class="sidebar-list">
+            <li>Squarespace</li>
+            <li>WordPress</li>
+            <li>Webflow</li>
+            <li>Framer</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <h4>Sectors worked in</h4>
+          <ul class="sidebar-list">
+            <li>Government</li>
+            <li>Finance</li>
+            <li>Telecommunications</li>
+            <li>Education</li>
+            <li>B2B & B2C</li>
+            <li>Hospitality</li>
+          </ul>
+          <p class="sidebar-note">* Public sector work sits in a <a href="https://www.grahambaird.com/" target="_blank" rel="noopener noreferrer">separate portfolio ↗</a>.</p>
+        </div>
+      </div>
     </div>
-  </header>
-
-  <main id="main-content">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <span class="eyebrow">Senior digital designer</span>
-          <h1 id="hero-title">Senior Digital Designer for <em>complex problems.</em></h1>
-
-          <p class="hero-copy">I design clear, accessible digital experiences for organisations with complex products, services and information.</p>
-          <p class="hero-copy">With 15 years' experience across the public and private sectors, I bring together UX, UI, content and service design to turn complicated problems into experiences that are easier to understand, navigate and use.</p>
-
-          <div class="hero-actions">
-            <a class="button button-primary" href="#work">View my work <span aria-hidden="true">→</span></a>
-            <a class="button button-secondary" href="#contact">Let's work together</a>
+  </div>
+</section>
+ 
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="contact-inner fade-in">
+      <span class="section-label">Get in touch</span>
+      <h2 class="contact-heading" id="contact-heading">Let's get started</h2>
+      <p class="contact-para">Available to start on new freelance and contract work immediately. Open to remote and on-site work.</p>
+      <p class="contact-para">Based in the United Kingdom.</p>
+      <div class="cta-box">
+        <div class="cta-box-inner">
+          <div class="cta-box-text">
+            <p class="cta-box-heading">Interested in working together?</p>
+            <p class="cta-box-sub">Book an introductory call or send me an email, and we can have a chat.</p>
           </div>
-
-          <div class="disciplines" aria-label="Areas of expertise">
-            <span>UX</span><span>UI</span><span>Content</span><span>Service design</span>
+          <div class="cta-box-actions">
+            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Book an introductory call (opens in new tab)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              Book an introductory call
+            </a>
+            <a href="mailto:graham_baird@outlook.com?subject=Project%20enquiry&body=Hi%20Graham%2C%0A%0AI%27d%20like%20to%20discuss%20a%20project.%0A%0AProject%20summary%3A%0ATimeline%3A%0ABudget%20range%3A%0A%0AThanks%2C" class="btn btn-secondary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+              Email me
+            </a>
           </div>
+      <a href="mailto:graham_baird@outlook.com" class="contact-email">graham_baird@outlook.com</a>
+      <p class="contact-phone"><a href="tel:+447791746775">+44 (0)7791 746 775</a></p>
+      </div>
+      </div>
+      <br>
+      <div class="memberships">
+        <div class="membership-item">
+          <img src="Circle_SQ_member.webp" alt="Squarespace Circle Gold member" onerror="this.style.display='none';">
         </div>
-
-        <div class="hero-art reveal" aria-hidden="true">
-          <div class="laptop">
-            <div class="laptop-screen">
-              <div class="screen-inner">
-                <div class="browser"><i></i><i></i><i></i></div>
-                <div class="mock-browser-content">
-                  <div class="mock-logo">Find a legal service</div>
-                  <div class="mock-search"></div>
-                  <div class="mock-heading">Find a legal aid provider</div>
-                  <div class="mock-sub">Search for a legal aid provider in your area or by specialist.</div>
-                  <div class="mock-field"></div>
-                  <div class="mock-popular">
-                    <strong>Popular searches</strong>
-                    <span>Family law</span><span>Housing law</span><span>Immigration</span><span>Mental health</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="laptop-base"></div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-top"><span>◉</span><span>☰</span></div>
-              <div class="phone-title">Get the right plan for you</div>
-              <div class="phone-copy">Discover our latest deals, plans and offers.</div>
-              <div class="phone-button">View our plans</div>
-              <div class="phone-card"></div>
-            </div>
-          </div>
+        <div class="membership-item">
+          <img src="IxDF_member_greyscale.png" alt="IxDF professional member" onerror="this.style.display='none';">
+        </div>
+        <div class="membership-item">
+          <img src="Bark_GB_member_greyscale.png" alt="Bark professional member" onerror="this.style.display='none';">
         </div>
       </div>
-    </section>
-
-    <section class="trust" aria-label="Selected organisations">
-      <div class="container trust-grid">
-        <span class="trust-label">Trusted by</span>
-        <div class="client"><img src="logo-govuk.webp" alt="GOV.UK UK Government"></div>
-        <div class="client"><img src="logo-hilton.webp" alt="Hilton Hotels &amp; Resorts"></div>
-        <div class="client"><img src="logo-scottishgov.webp" alt="mygov.scot Scottish Government"></div>
-        <div class="client"><img src="logo-uog.webp" alt="University of Glasgow"></div>
-        <div class="client"><img src="logo-three.webp" alt="Three Mobile"></div>
-        <div class="client"><img src="logo-newsinternational.webp" alt="News International"></div>
-      </div>
-    </section>
-
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="container">
-        <div class="work-head reveal">
-          <div>
-            <span class="section-label">Selected work</span>
-            <h2 id="work-title">Digital products, services and experiences designed across government, telecommunications, education and hospitality.</h2>
-          </div>
-          <a class="small-link" href="#work">View all work&nbsp; →</a>
-        </div>
-
-        <div class="work-grid">
-          <article class="work-card reveal">
-            <div class="work-image moj">
-              <img src="moj-design-system.webp" alt="Ministry of Justice design system project" loading="lazy">
-            </div>
-            <div class="work-body">
-              <div class="work-client">Ministry of Justice</div>
-              <h3 class="work-title">Designing a new way for the community to contribute to a national design system.</h3>
-              <p class="work-desc">How might an open design system enable its users to contribute, share and improve the patterns and components they rely on?</p>
-              <div class="work-tags">Service design&nbsp; · &nbsp;UX&nbsp; · &nbsp;UI&nbsp; · &nbsp;Content</div>
-              <a class="work-cta" href="https://www.grahambaird.com/" target="_blank" rel="noopener noreferrer">View case study&nbsp; →</a>
-            </div>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-image three">
-              <img src="three-mobile.webp" alt="Three Mobile digital experience" loading="lazy">
-            </div>
-            <div class="work-body">
-              <div class="work-client">Three Mobile</div>
-              <h3 class="work-title">Designing and managing a high-traffic consumer digital experience.</h3>
-              <p class="work-desc">Overseeing the UX, content and day-to-day digital experience of the Three UK website, helping customers find products, understand offers and complete their journeys.</p>
-              <div class="work-tags">UX&nbsp; · &nbsp;UI&nbsp; · &nbsp;Content&nbsp; · &nbsp;Design QA</div>
-              <a class="work-cta" href="case-study-three-mobile.html">View case study&nbsp; →</a>
-            </div>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-image uog">
-              <img src="uog-wireframe.webp" alt="University of Glasgow digital experience" loading="lazy">
-            </div>
-            <div class="work-body">
-              <div class="work-client">University of Glasgow</div>
-              <h3 class="work-title">Turning complex information into a clearer digital experience.</h3>
-              <p class="work-desc">Researching, structuring and prototyping a new internal experience designed to make information easier for staff to discover and use.</p>
-              <div class="work-tags">UX&nbsp; · &nbsp;Research&nbsp; · &nbsp;Information architecture&nbsp; · &nbsp;UI</div>
-              <a class="work-cta" href="case-study-uog.html">View case study&nbsp; →</a>
-            </div>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-image hilton">
-              <img src="hilton-hotel.webp" alt="Hilton hotel digital experience" loading="lazy">
-            </div>
-            <div class="work-body">
-              <div class="work-client">Hilton</div>
-              <h3 class="work-title">Helping people find the right hotel through better digital experiences.</h3>
-              <p class="work-desc">Combining UX and content design to improve how information is structured, presented and understood across a global hospitality experience.</p>
-              <div class="work-tags">UX&nbsp; · &nbsp;Content design&nbsp; · &nbsp;UX writing</div>
-              <a class="work-cta" href="case-study-hilton.html">View case study&nbsp; →</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section services-section" id="services" aria-labelledby="services-title">
-      <div class="container services-grid">
-        <div class="services-intro reveal">
-          <span class="section-label">What I do</span>
-          <h2 id="services-title">One design discipline. Multiple perspectives.</h2>
-          <p>The best digital experiences don't come from treating UX, UI, content and service design as separate activities. I bring them together.</p>
-        </div>
-
-        <article class="service reveal">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="16.5" cy="15" r="3"/><path d="M3.5 18c.8-3 2.5-4.5 5.5-4.5M14 5.5l3-2M12 11.5l2.5 1.5"/></svg>
-          </div>
-          <h3>UX design</h3>
-          <p>Understanding people, their needs and the problems standing in their way — then designing experiences around them.</p>
-        </article>
-
-        <article class="service reveal">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M8 15l8-6M8 9h3M13 15h3"/></svg>
-          </div>
-          <h3>UI &amp; interaction design</h3>
-          <p>Turning journeys and ideas into clear, intuitive interfaces that help people understand what they can do and what happens next.</p>
-        </article>
-
-        <article class="service reveal">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 5h12v14H6z"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-          </div>
-          <h3>Content design</h3>
-          <p>Making information easier to understand through purposeful content, structure, language and interaction.</p>
-        </article>
-
-        <article class="service reveal">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1"/></svg>
-          </div>
-          <h3>Service design</h3>
-          <p>Looking beyond the interface to understand the wider service, its people, processes and touchpoints.</p>
-        </article>
-
-        <article class="service reveal">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="6" width="14" height="12" rx="2"/><path d="M8 3v3M16 3v3M8 14h8"/></svg>
-          </div>
-          <h3>Research &amp; discovery</h3>
-          <p>Using research, workshops, interviews and prototyping to understand problems before committing to solutions.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="approach" aria-labelledby="approach-title">
-      <div class="container approach-grid">
-        <div class="approach-title reveal">
-          <span class="section-label">My approach</span>
-          <h2 id="approach-title">Understand. Simplify. Validate.</h2>
-        </div>
-
-        <div class="steps">
-          <article class="step reveal">
-            <div class="step-number">01</div>
-            <h3>Understand</h3>
-            <p>I start with the problem, not the solution. I explore the needs of users, the organisation and the wider service to understand what is really happening and where the opportunities lie.</p>
-          </article>
-          <article class="step reveal">
-            <div class="step-number">02</div>
-            <h3>Simplify</h3>
-            <p>Complexity rarely needs to be passed on to the person using the service. I turn research and insight into clearer journeys, interactions, interfaces and content.</p>
-          </article>
-          <article class="step reveal">
-            <div class="step-number">03</div>
-            <h3>Validate</h3>
-            <p>Good ideas need evidence. I prototype, test, iterate and refine — using feedback to improve the experience before it reaches the people who depend on it.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section experience" aria-labelledby="experience-title">
-      <div class="container experience-grid">
-        <div class="experience-intro reveal">
-          <span class="section-label">Why work with me</span>
-          <h2 id="experience-title">Experience that spans the whole experience.</h2>
-          <p>I've worked across government, telecommunications, education and hospitality — designing everything from digital services and websites to design systems, content experiences and internal platforms.</p>
-        </div>
-
-        <div class="stat reveal">
-          <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M8 3v4M16 3v4M8 12h8"/></svg></div>
-          <strong>15+</strong><span>Years' design experience</span>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12v10H6z"/><path d="M8 4l3 3M16 4l-3 3"/></svg></div>
-          <strong>UX · UI · Content · Service</strong><span>Integrated design expertise</span>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19V8h5v11M14 19V5h5v14"/></svg></div>
-          <strong>Public + private</strong><span>Experience across complex organisations</span>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M8 12l2.5 2.5L16 9"/></svg></div>
-          <strong>End to end</strong><span>From discovery to delivery</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="about" id="about" aria-labelledby="about-title">
-      <div class="container about-grid">
-        <div class="portrait reveal">
-          <img src="Graham_Baird_profile.jpg" alt="Portrait of Graham Baird" loading="lazy">
-        </div>
-
-        <div class="about-copy reveal">
-          <span class="section-label">About me</span>
-          <h2 id="about-title">I'm Graham.</h2>
-          <p>I'm a senior multidisciplinary digital designer based in the UK.</p>
-          <p>I specialise in making complex things simpler — combining UX, UI, content and service design to create digital experiences that are clear, accessible and useful.</p>
-        </div>
-
-        <div class="about-copy reveal">
-          <p>My career has taken me from commercial digital products and global brands to some of the UK's most complex public services. I've worked with organisations including the Ministry of Justice, GOV.UK, Scottish Government, Three, Hilton and the University of Glasgow, working with multidisciplinary teams to understand problems, explore opportunities and deliver better digital experiences.</p>
-          <p><strong>That's the value of multidisciplinary design: seeing the whole experience, not just one part of it.</strong></p>
-          <a class="small-link" href="#contact">More about me&nbsp; →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-grid">
-        <div class="reveal">
-          <span class="section-label">Let's work together</span>
-          <h2 id="contact-title">Have a complex problem?</h2>
-        </div>
-
-        <div class="reveal">
-          <p>Whether you're designing a new digital service, improving an existing product or trying to make something complicated easier to use, I can help. I work with organisations and teams that need thoughtful, practical design — from discovery and strategy through to UX, UI, content, prototyping and delivery.</p>
-          <p>Available for freelance and contract work. Based in the United Kingdom · Remote and on-site.</p>
-        </div>
-
-        <div class="contact-actions reveal">
-          <a class="button button-primary" href="mailto:graham_baird@outlook.com?subject=Project%20enquiry">Get in touch&nbsp; →</a>
-          <div class="socials" aria-label="Social links">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Read.cv">◎</a>
-            <a href="mailto:graham_baird@outlook.com" aria-label="Email Graham Baird">✉</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <span>© 2026 Graham Baird</span>
-      <span>Senior Digital Designer · United Kingdom</span>
     </div>
-  </footer>
-
-  <script>
-    const menuButton = document.querySelector('.menu-button');
-    const navigation = document.querySelector('#primary-navigation');
-
-    menuButton.addEventListener('click', () => {
-      const open = navigation.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', String(open));
-      menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-    });
-
-    navigation.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navigation.classList.remove('open');
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.setAttribute('aria-label', 'Open navigation menu');
-      });
-    });
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const reveals = document.querySelectorAll('.reveal');
-
-    if (reducedMotion || !('IntersectionObserver' in window)) {
-      reveals.forEach(el => el.classList.add('is-visible'));
+  </div>
+</section>
+ 
+</main>
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <span>© 2026 Graham Baird</span>
+    <span>Designer — United Kingdom</span>
+  </div>
+</footer>
+ 
+<script>
+  const obs = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }),
+    { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.09 + 's';
+    obs.observe(el);
+  });
+ 
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+ 
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    if (isOpen) {
+      mobileMenu.removeAttribute('hidden');
+      mobileMenu.classList.add('open');
     } else {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {threshold:0.08, rootMargin:'0px 0px -30px 0px'});
-
-      reveals.forEach(el => observer.observe(el));
+      mobileMenu.setAttribute('hidden', '');
+      mobileMenu.classList.remove('open');
     }
-  </script>
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+ 
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('hidden', '');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+  }
+ 
+ // Back to top
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+ 
+  // Skip link — bypasses smooth scroll to move focus correctly
+  document.getElementById('skipLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.getElementById('work');
+    if (target) {
+      // Temporarily disable smooth scrolling for the skip link
+      document.documentElement.style.scrollBehavior = 'auto';
+      target.setAttribute('tabindex', '-1');
+      target.focus();
+      target.scrollIntoView();
+      // Restore smooth scrolling
+      setTimeout(() => {
+        document.documentElement.style.scrollBehavior = '';
+      }, 100);
+    }
+  });
+</script>
+ 
 </body>
 </html>
